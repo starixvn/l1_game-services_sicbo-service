@@ -159,4 +159,21 @@ export default class Bot extends Table.TableGameBot {
 
         return chipList.length > 0 ? chipList[0] : this.getMinBet();
     }
+
+    async insertOrUpdateBet(bot, choice, amount, currentBet) {
+        const betIncrement = { [choice]: amount, totalAmount: amount };
+
+        const create = {
+            uid: bot.id,
+            name: bot.name,
+            phien: this.gameData.roundId,
+            time: new Date(),
+        };
+
+        await this.definition.tempBetRepository.updateOne(
+            { uid: bot.id, phien: this.gameData.roundId },
+            { $inc: betIncrement, $setOnInsert: create },
+            { upsert: true, setDefaultsOnInsert: true }
+        );
+    }
 }
