@@ -1,0 +1,162 @@
+import { helpers } from "sc-common";
+import { Table } from "sc-game-base";
+
+import constants from "../constants";
+
+export default class Bot extends Table.TableGameBot {
+    constructor(definition, gameData) {
+        super(definition, gameData, null);
+
+        this.betChoiceRatio = { MainOpts: 42, SubOpts: 30, AnyTripleOpts: 3, TotalOpts1: 15, TotalOpts2: 10 };
+
+        this.mainOpts = ["big", "small"];
+        this.subOpts = ["specific1", "specific2", "specific3", "specific4", "specific5", "specific6"];
+        this.anyTripleOpts = ["anyTriple"];
+        this.totalOpts1 = ["total8", "total9", "total10", "total11", "total12", "total13"];
+        this.totalOpts2 = ["total4", "total5", "total6", "total7", "total14", "total15", "total16", "total17"];
+
+        this.smallTicketRatio = 70;
+        this.smallTickets = 0;
+        this.resetAllBets();
+    }
+
+    async resetAllBotData() {
+        await super.resetAllBotData();
+        this.resetAllBets();
+    }
+
+    resetAllBets() {
+        this.allBets = {
+            big: 0,
+            small: 0,
+            specific1: 0,
+            specific2: 0,
+            specific3: 0,
+            specific4: 0,
+            specific5: 0,
+            specific6: 0,
+            anyTriple: 0,
+            specific2: 0,
+            total4: 0,
+            total5: 0,
+            total6: 0,
+            total7: 0,
+            total8: 0,
+            total9: 0,
+            total10: 0,
+            total11: 0,
+            total12: 0,
+            total13: 0,
+            total14: 0,
+            total15: 0,
+            total16: 0,
+            total17: 0,
+        };
+
+        this.smallTickets = 0;
+    }
+
+    getBetChoice(bot) {
+        const totalBotBet = this.getAllBetAmount();
+
+        const betChoiceRatios = [
+            {
+                group: this.mainOpts,
+                underBetRatio: (this.getTotalAmountOnChoiceGroup(this.mainOpts) * 100) / totalBotBet < this.betChoiceRatio.MainOpts,
+            },
+            {
+                group: this.subOpts,
+                underBetRatio: (this.getTotalAmountOnChoiceGroup(this.subOpts) * 100) / totalBotBet < this.betChoiceRatio.SubOpts,
+            },
+            {
+                group: this.anyTripleOpts,
+                underBetRatio:
+                    (this.getTotalAmountOnChoiceGroup(this.anyTripleOpts) * 100) / totalBotBet < this.betChoiceRatio.AnyTripleOpts,
+            },
+            {
+                group: this.totalOpts1,
+                underBetRatio: (this.getTotalAmountOnChoiceGroup(this.totalOpts1) * 100) / totalBotBet < this.betChoiceRatio.TotalOpts1,
+            },
+            {
+                group: this.totalOpts2,
+                underBetRatio: (this.getTotalAmountOnChoiceGroup(this.totalOpts2) * 100) / totalBotBet < this.betChoiceRatio.TotalOpts2,
+            },
+        ];
+
+        const underRatioGroups = helpers.arrayHelper.shuffle(betChoiceRatios.filter((data) => data.underBetRatio));
+
+        const choice =
+            underRatioGroups.length > 0
+                ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
+                : this.getRandomChoiceFromGroup(this.mainOpts);
+
+        const previousUniqueChoices = bot.choices.filter((betChoice) => this.mainOpts.includes(betChoice));
+
+        return previousUniqueChoices.length > 0 ? previousUniqueChoices[0] : choice;
+    }
+
+    getMaxBet(bot, choice) {
+        const gameConfigs = this.gameData.gameConfigs;
+        const minBet = this.getMinBet();
+        const maxBetPerChoice = gameConfigs.choices_maxbet[choice];
+        const botMaxBet = gameConfigs.bot_maxbet;
+        let maxBet = Math.min(maxBetPerChoice, botMaxBet);
+
+        const isSmallTicket = this.totalTickets === 0 ? true : (this.smallTickets * 100) / this.totalTickets < this.smallTicketRatio;
+        const maxBetOfSmallTicket = Math.min(minBet * 50, botMaxBet * 0.3, maxBetPerChoice);
+        maxBet = isSmallTicket ? maxBetOfSmallTicket : maxBet;
+
+        if (this.anyTripleOpts.includes(choice) || this.totalOpts2.includes(choice)) {
+            maxBet = Math.min(maxBetPerChoice, botMaxBet * 0.1);
+        }
+
+        if (this.totalOpts1.includes(choice)) {
+            maxBet = Math.min(maxBetPerChoice, botMaxBet * 0.5);
+        }
+
+        return Math.max(maxBet, minBet);
+    }
+
+    getRandomChoiceFromGroup(group) {
+        const randomIndex = (Math.random() * group.length) >> 0;
+        return group[randomIndex];
+    }
+
+    getTotalAmountOnChoiceGroup(choices) {
+        let total = 0;
+        choices.forEach((choice) => (total += this.allBets[choice]));
+
+        return total;
+    }
+
+    getTotalAmountOfBotOnChoiceGroup(bot, choices) {
+        let total = 0;
+        choices.forEach((choice) => (total += bot.betOnChoices[choice]));
+
+        return total;
+    }
+
+    getAllBetAmount() {
+        let total = 0;
+        this.definition.choices.forEach((choice) => (total += this.allBets[choice]));
+
+        return total;
+    }
+
+    isSmallTicket(amount) {
+        return amount <= this.getMinBet() * 50;
+    }
+
+    updateBotInRoomData(bot, choice, amount, balance) {
+        super.updateBotInRoomData(bot, choice, amount, balance);
+
+        this.allBets[choice] = this.allBets[choice] ? this.allBets[choice] + amount : amount;
+        this.smallTickets += this.isSmallTicket(amount) ? 1 : 0;
+    }
+
+    convertAmountToChip(amount) {
+        const chipList = constants.chips.filter((chip) => amount % chip === 0);
+
+        return chipList.length > 0 ? chipList[0] : this.getMinBet();
+    }
+}
