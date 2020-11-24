@@ -31,6 +31,7 @@ const settlementRuleEntries = Object.entries({
         const total = resultArray.reduce(sum);
         return total <= 10;
     },
+    anyTriple: (resultArray) => resultArray.every((dice) => dice === resultArray[0]),
     total4: (resultArray) => {
         const total = resultArray.reduce(sum);
         return total === 4;
