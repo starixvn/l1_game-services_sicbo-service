@@ -1,8 +1,8 @@
-import { Table } from "sc-game-base";
+import { Core } from "sc-game-base";
 
 import constants from "../constants";
 
-export default class SettleGameRoundConsumer extends Table.EventConsumers.SettleGameRoundConsumer {
+export default class SettleGameRoundConsumer extends Core.BaseEventConsumers.SettleGameRoundConsumer {
     async settleBets({ result, settlementResult, roundId, time }) {
         const bets = await this.queryBets(roundId);
 

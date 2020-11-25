@@ -1,11 +1,11 @@
-import { Table } from "sc-game-base";
+import { Core } from "sc-game-base";
 
 import appConfigs from "./app-configs";
 import { SettleGameRoundConsumer } from "./consumers";
 import { Bot, GameCron, ProcessBetQueue } from "./crons";
 import gameSettings from "./game-settings";
 import { DiceRandom } from "./helpers";
-import { betLogs, bets, rounds, tmpBets } from "./models";
+import { betLogs, bets, rounds } from "./models";
 import Startup from "./startup";
 
 const generateResult = () => {
@@ -101,13 +101,13 @@ const getSettlementResult = (roundResult) => {
 };
 
 const run = async () => {
-    const gameData = new Table.TableGameData(gameSettings.durations.wholeRound);
+    const gameData = new Core.GameData(gameSettings.durations.wholeRound);
 
-    const definition = new Table.TableGameDefinition(gameSettings, generateResult, getSettlementResult, rounds, bets, tmpBets, betLogs);
+    const definition = new Core.GameDefinition(gameSettings, generateResult, getSettlementResult, rounds, bets, betLogs);
 
     const gameCron = new GameCron(definition, gameData, new Bot(definition, gameData), new SettleGameRoundConsumer(definition, gameData));
     const startup = new Startup(appConfigs, definition, gameData, gameCron, new ProcessBetQueue(definition, gameData));
-    const app = new Table.TableGameApp(appConfigs, definition, gameData, startup);
+    const app = new Core.BaseGameApp(appConfigs, definition, gameData, startup);
 
     await app.run();
 };

@@ -1,5 +1,5 @@
 import betLogs from "./sicbo-bet-logs";
-import { bets, tmpBets } from "./sicbo-bets";
+import bets from "./sicbo-bets";
 import rounds from "./sicbo-rounds";
 
-export { betLogs, bets, tmpBets, rounds };
+export { betLogs, bets, rounds };

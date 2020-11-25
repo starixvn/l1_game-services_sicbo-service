@@ -40,7 +40,4 @@ const schema = new mongoose.Schema({
     freeBet: { type: Boolean, default: false },
 });
 
-const bets = mongoose.model("SicBo_one", schema);
-const tmpBets = mongoose.model("SicBo_tmpone", schema);
-
-export { bets, tmpBets };
+export default mongoose.model("SicBo_one", schema);

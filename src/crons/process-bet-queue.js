@@ -1,6 +1,6 @@
-import { Table } from "sc-game-base";
+import { Core } from "sc-game-base";
 
-export default class ProcessBetQueue extends Table.Crons.TableProcessBetQueue {
+export default class ProcessBetQueue extends Core.Cron.ProcessBetQueue {
     async upsertBet(player, roundId, bet) {
         const existingBetFilter = { uid: player.UID, phien: roundId, freeBet: bet.freeBet };
         const existingBet = await this.definition.betRepository.findOne(existingBetFilter).exec();

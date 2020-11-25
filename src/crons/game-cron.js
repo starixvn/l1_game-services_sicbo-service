@@ -1,6 +1,6 @@
-import { Table } from "sc-game-base";
+import { Core } from "sc-game-base";
 
-export default class GameCron extends Table.TableGameCron {
+export default class GameCron extends Core.Cron.BaseGameCron {
     isStartingTime(remainingTime, durations) {
         return remainingTime === durations.placingBets + durations.shakeThePlateDuration;
     }

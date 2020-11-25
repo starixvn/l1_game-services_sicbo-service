@@ -2,8 +2,8 @@ export default {
     id: 27,
     name: "SicBo",
     durations: {
-        wholeRound: 42,
-        placingBets: 30,
+        wholeRound: 57,
+        placingBets: 45,
         lockingBet: 5,
         shakeThePlateDuration: 3,
     },

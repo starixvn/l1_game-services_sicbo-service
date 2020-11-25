@@ -1,14 +1,17 @@
+import Chance from "chance";
+import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
-import { Table } from "sc-game-base";
+import { Core } from "sc-game-base";
 
 import constants from "../constants";
 
-export default class Bot extends Table.TableGameBot {
+export default class Bot extends Core.BaseBot {
     constructor(definition, gameData) {
         super(definition, gameData, null);
 
         this.betChoiceRatio = { MainOpts: 42, SubOpts: 30, AnyTripleOpts: 3, TotalOpts1: 15, TotalOpts2: 10 };
 
+        this.chance = new Chance();
         this.mainOpts = ["big", "small"];
         this.subOpts = ["specific1", "specific2", "specific3", "specific4", "specific5", "specific6"];
         this.anyTripleOpts = ["anyTriple"];
@@ -18,6 +21,69 @@ export default class Bot extends Table.TableGameBot {
         this.smallTicketRatio = 70;
         this.smallTickets = 0;
         this.resetAllBets();
+        this.botList = [];
+    }
+
+    async run() {
+        if (
+            !!this.botList.length &&
+            this.gameData.gameConfigs?.botenabled &&
+            this.gameData.remainingTime > this.definition.durations.lockingBet
+        ) {
+            const maxBotRandom = this.botList.length / this.gameData.remainingTime;
+            const botsToBet = this.chance.integer({ min: (maxBotRandom * 2) / 3, max: maxBotRandom });
+
+            let botsToRemove = [];
+
+            for (let i = 0; i < botsToBet; i++) {
+                const bot = this.botList[i];
+                if (bot) {
+                    await this.placeBet(bot);
+                    botsToRemove.push(bot);
+                }
+            }
+
+            botsToRemove.forEach((index) => {
+                this.botList.splice(index, 1);
+            });
+        }
+    }
+
+    async reset() {
+        const configs = this.gameData.gameConfigs;
+
+        if (configs?.botenabled) {
+            let bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
+            this.currentBotRatio = helpers.configHelper.getMaxBotForCurrentHour(configs);
+            this.maxNumberOfBots = Math.floor(bots.length * this.currentBotRatio);
+
+            this.botList = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
+        } else {
+            botList = [];
+        }
+    }
+
+    async placeBet(bot) {
+        const choice = this.getBetChoice(bot);
+        const minBet = this.getMinBet();
+        const maxBet = this.getMaxBet(bot, choice);
+
+        const betAmount = this.convertAmountToChip(helpers.numberHelper.getRandomNumberStep5(minBet, maxBet, true));
+
+        if (this.gameData.remainingTime > this.definition.durations.lockingBet) {
+            this.gameData.totalBets[choice] = this.gameData.totalBets[choice] ? this.gameData.totalBets[choice] + betAmount : betAmount;
+            this.allBets[choice] += betAmount;
+
+            this.totalTickets++;
+
+            if (this.isSmallTicket(betAmount)) {
+                this.smallTickets++;
+            }
+        }
+    }
+
+    async removeAllBots() {
+        this.botList = [];
     }
 
     async resetAllBotData() {
@@ -56,6 +122,10 @@ export default class Bot extends Table.TableGameBot {
         this.smallTickets = 0;
     }
 
+    async removeAllBots() {
+        this.bop;
+    }
+
     getBetChoice(bot) {
         const totalBotBet = this.getAllBetAmount();
 
@@ -90,9 +160,7 @@ export default class Bot extends Table.TableGameBot {
                 ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
                 : this.getRandomChoiceFromGroup(this.mainOpts);
 
-        const previousUniqueChoices = bot.choices.filter((betChoice) => this.mainOpts.includes(betChoice));
-
-        return previousUniqueChoices.length > 0 ? previousUniqueChoices[0] : choice;
+        return choice;
     }
 
     getMaxBet(bot, choice) {
@@ -147,33 +215,9 @@ export default class Bot extends Table.TableGameBot {
         return amount <= this.getMinBet() * 50;
     }
 
-    updateBotInRoomData(bot, choice, amount, balance) {
-        super.updateBotInRoomData(bot, choice, amount, balance);
-
-        this.allBets[choice] = this.allBets[choice] ? this.allBets[choice] + amount : amount;
-        this.smallTickets += this.isSmallTicket(amount) ? 1 : 0;
-    }
-
     convertAmountToChip(amount) {
         const chipList = constants.chips.filter((chip) => amount % chip === 0);
 
         return chipList.length > 0 ? chipList[0] : this.getMinBet();
-    }
-
-    async insertOrUpdateBet(bot, choice, amount, currentBet) {
-        const betIncrement = { [choice]: amount, totalAmount: amount };
-
-        const create = {
-            uid: bot.id,
-            name: bot.name,
-            phien: this.gameData.roundId,
-            time: new Date(),
-        };
-
-        await this.definition.tempBetRepository.updateOne(
-            { uid: bot.id, phien: this.gameData.roundId },
-            { $inc: betIncrement, $setOnInsert: create },
-            { upsert: true, setDefaultsOnInsert: true }
-        );
     }
 }
