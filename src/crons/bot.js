@@ -59,7 +59,7 @@ export default class Bot extends Core.BaseBot {
 
             this.botList = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
         } else {
-            botList = [];
+            this.botList = [];
         }
     }
 
@@ -102,7 +102,6 @@ export default class Bot extends Core.BaseBot {
             specific5: 0,
             specific6: 0,
             anyTriple: 0,
-            specific2: 0,
             total4: 0,
             total5: 0,
             total6: 0,
@@ -120,10 +119,6 @@ export default class Bot extends Core.BaseBot {
         };
 
         this.smallTickets = 0;
-    }
-
-    async removeAllBots() {
-        this.bop;
     }
 
     getBetChoice(bot) {
