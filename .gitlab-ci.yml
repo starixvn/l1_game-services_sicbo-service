@@ -15,25 +15,6 @@ stages:
     - deploy
 
 include:
-    - project: "lumi-ops/ci-scripts"
-      ref: master
-      file: "sonarqube/sonarqube.gitlab-ci.yml"
-    - project: "lumi-ops/ci-scripts"
-      ref: master
-      file: "docker/before-script-docker.gitlab-ci.yml"
-    - project: "lumi-ops/ci-scripts"
-      ref: master
-      file: "rules/l1-rules.gitlab-ci.yml"
-    - project: "lumi-ops/ci-scripts"
-      ref: master
-      file: "docker/build-docker-image.gitlab-ci.yml"
-    - project: "lumi-ops/ci-scripts"
-      ref: master
-      file: "docker/post-build-docker-image.gitlab-ci.yml"
-    - project: "lumi-ops/ci-scripts"
-      ref: master
-      file: "docker/deploy-swarm-service.gitlab-ci.yml"
-    - local: .gitlab-ci/deploy-local.gitlab-ci.yml
-    - local: .gitlab-ci/deploy-sit.gitlab-ci.yml
-    - local: .gitlab-ci/deploy-uat.gitlab-ci.yml
-    - local: .gitlab-ci/deploy-prod.gitlab-ci.yml
+  - project: "ci/luminet/sicbo-service-ci"
+    ref: L1
+    file: "gitlab-ci.yml"
