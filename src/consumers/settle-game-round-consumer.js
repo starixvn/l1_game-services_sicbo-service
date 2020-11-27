@@ -70,4 +70,9 @@ export default class SettleGameRoundConsumer extends Core.BaseEventConsumers.Set
     getOddName(result, choice) {
         return constants.oddMapper[Object.values(result).filter((value) => value === constants.resultMapper[choice]).length];
     }
+
+    async queryBets(roundId) {
+        const bets = await this.definition.betRepository.find({ phien: roundId }).exec();
+        return bets;
+    }
 }
