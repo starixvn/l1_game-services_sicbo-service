@@ -8,9 +8,6 @@ const Schema = new mongoose.Schema({
     choice: { type: String, required: true },
     amount: { type: Number, required: true },
 
-    thanhtoan: { type: Boolean, default: false },
-    win: { type: Boolean, default: false },
-    betwin: { type: Number, default: 0 },
     time: { type: Date },
 
     memberId: { type: Number },
