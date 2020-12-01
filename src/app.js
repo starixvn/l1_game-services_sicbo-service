@@ -25,11 +25,11 @@ const settlementRuleEntries = Object.entries({
     specific6: (resultArray) => resultArray.includes(6),
     big: (resultArray) => {
         const total = resultArray.reduce(sum);
-        return total > 10;
+        return total > 10 && !resultArray.every((dice) => dice === resultArray[0]);
     },
     small: (resultArray) => {
         const total = resultArray.reduce(sum);
-        return total <= 10;
+        return total <= 10 && !resultArray.every((dice) => dice === resultArray[0]);
     },
     anyTriple: (resultArray) => resultArray.every((dice) => dice === resultArray[0]),
     total4: (resultArray) => {
