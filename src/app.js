@@ -2,7 +2,7 @@ import { Core } from "sc-game-base";
 
 import appConfigs from "./app-configs";
 import { SettleGameRoundConsumer } from "./consumers";
-import { Bot, GameCron, ProcessBetQueue } from "./crons";
+import { Bot, GameCron } from "./crons";
 import gameSettings from "./game-settings";
 import { DiceRandom } from "./helpers";
 import { betLogs, bets, rounds } from "./models";
@@ -106,7 +106,7 @@ const run = async () => {
     const definition = new Core.GameDefinition(gameSettings, generateResult, getSettlementResult, rounds, bets, betLogs);
 
     const gameCron = new GameCron(definition, gameData, new Bot(definition, gameData), new SettleGameRoundConsumer(definition, gameData));
-    const startup = new Startup(appConfigs, definition, gameData, gameCron, new ProcessBetQueue(definition, gameData));
+    const startup = new Startup(appConfigs, definition, gameData, gameCron);
     const app = new Core.BaseGameApp(appConfigs, definition, gameData, startup);
 
     await app.run();
