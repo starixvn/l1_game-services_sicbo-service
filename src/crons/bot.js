@@ -3,8 +3,6 @@ import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
-import constants from "../constants";
-
 export default class Bot extends Core.BaseBot {
     constructor(definition, gameData) {
         super(definition, gameData, null);
@@ -20,8 +18,22 @@ export default class Bot extends Core.BaseBot {
 
         this.smallTicketRatio = 70;
         this.smallTickets = 0;
-        this.resetAllBets();
         this.botList = [];
+        this.oddTicketRatio = 20;
+        this.oddTickets = 0;
+    }
+
+    async reset() {
+        await super.reset();
+
+        const configs = this.gameData.gameConfigs;
+
+        if (configs?.botenabled) {
+            const bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
+            this.botList = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
+        } else {
+            this.botList = [];
+        }
     }
 
     async run() {
@@ -49,26 +61,12 @@ export default class Bot extends Core.BaseBot {
         }
     }
 
-    async reset() {
-        const configs = this.gameData.gameConfigs;
-
-        if (configs?.botenabled) {
-            let bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
-            this.currentBotRatio = helpers.configHelper.getMaxBotForCurrentHour(configs);
-            this.maxNumberOfBots = Math.floor(bots.length * this.currentBotRatio);
-
-            this.botList = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
-        } else {
-            this.botList = [];
-        }
-    }
-
     async placeBet(bot) {
         const choice = this.getBetChoice(bot);
         const minBet = this.getMinBet();
         const maxBet = this.getMaxBet(bot, choice);
-
-        const betAmount = this.chance.floating({ min: minBet, max: maxBet, fixed: 2 });
+        const isOddTicket = this.totalTickets === 0 ? false : (this.oddTickets * 100) / this.totalTickets < this.oddTicketRatio;
+        const betAmount = this.getBetAmount(minBet, maxBet, isOddTicket);
 
         if (this.gameData.remainingTime > this.definition.durations.lockingBet) {
             this.gameData.totalBets[choice] = this.gameData.totalBets[choice] ? this.gameData.totalBets[choice] + betAmount : betAmount;
@@ -79,6 +77,10 @@ export default class Bot extends Core.BaseBot {
             if (this.isSmallTicket(betAmount)) {
                 this.smallTickets++;
             }
+
+            if (isOddTicket) {
+                this.oddTickets++;
+            }
         }
     }
 
@@ -86,8 +88,8 @@ export default class Bot extends Core.BaseBot {
         this.botList = [];
     }
 
-    async resetAllBotData() {
-        await super.resetAllBotData();
+    resetAllBotData() {
+        super.resetAllBotData();
         this.resetAllBets();
     }
 
@@ -119,6 +121,11 @@ export default class Bot extends Core.BaseBot {
         };
 
         this.smallTickets = 0;
+        this.oddTickets = 0;
+    }
+
+    getBetAmount(minBet, maxBet, isOdd) {
+        return isOdd ? this.chance.floating({ min: minBet, max: maxBet, fixed: 2 }) : this.chance.integer({ min: minBet, max: maxBet });
     }
 
     getBetChoice(bot) {
@@ -181,8 +188,7 @@ export default class Bot extends Core.BaseBot {
     }
 
     getRandomChoiceFromGroup(group) {
-        const randomIndex = (Math.random() * group.length) >> 0;
-        return group[randomIndex];
+        return this.chance.pickone(group);
     }
 
     getTotalAmountOnChoiceGroup(choices) {
@@ -208,11 +214,5 @@ export default class Bot extends Core.BaseBot {
 
     isSmallTicket(amount) {
         return amount <= this.getMinBet() * 50;
-    }
-
-    convertAmountToChip(amount) {
-        const chipList = constants.chips.filter((chip) => amount % chip === 0);
-
-        return chipList.length > 0 ? chipList[0] : this.getMinBet();
     }
 }
