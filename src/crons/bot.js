@@ -68,7 +68,7 @@ export default class Bot extends Core.BaseBot {
         const minBet = this.getMinBet();
         const maxBet = this.getMaxBet(bot, choice);
 
-        const betAmount = new Chance().floating({ min: minBet, max: maxBet, fixed: 2 });
+        const betAmount = this.chance.floating({ min: minBet, max: maxBet, fixed: 2 });
 
         if (this.gameData.remainingTime > this.definition.durations.lockingBet) {
             this.gameData.totalBets[choice] = this.gameData.totalBets[choice] ? this.gameData.totalBets[choice] + betAmount : betAmount;
