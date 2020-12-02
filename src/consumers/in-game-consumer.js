@@ -6,8 +6,6 @@ export default class InGameConsumer extends Core.BaseEventConsumers.InGameConsum
 
         const { chips } = this.gameData.ingame[realPlayer.profile.name] || { chips: {} };
 
-        delete players[realPlayer.UID];
-
         return {
             ...payload,
             chips,

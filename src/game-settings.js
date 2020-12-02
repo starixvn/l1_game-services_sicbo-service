@@ -1,5 +1,5 @@
 export default {
-    id: 27,
+    id: 25,
     name: "SicBo",
     durations: {
         wholeRound: 57,
