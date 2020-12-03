@@ -7,7 +7,7 @@ export default class Bot extends Core.BaseBot {
     constructor(definition, gameData) {
         super(definition, gameData, null);
 
-        this.betChoiceRatio = { MainOpts: 42, SubOpts: 30, AnyTripleOpts: 3, TotalOpts1: 15, TotalOpts2: 10 };
+        this.betChoiceRatio = { MainOpts: 52, SubOpts: 30, AnyTripleOpts: 2, TotalOpts1: 10, TotalOpts2: 6 };
 
         this.chance = new Chance();
         this.mainOpts = ["big", "small"];
@@ -181,7 +181,7 @@ export default class Bot extends Core.BaseBot {
         }
 
         if (this.totalOpts1.includes(choice)) {
-            maxBet = Math.min(maxBetPerChoice, botMaxBet * 0.5);
+            maxBet = Math.min(maxBetPerChoice, botMaxBet * 0.2);
         }
 
         return Math.max(maxBet, minBet);
