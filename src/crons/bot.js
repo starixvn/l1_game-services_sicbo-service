@@ -51,7 +51,7 @@ export default class Bot extends Core.BaseBot {
                 const bot = this.botList[i];
                 if (bot) {
                     await this.placeBet(bot);
-                    botsToRemove.push(bot);
+                    botsToRemove.push(i);
                 }
             }
 
