@@ -2,8 +2,8 @@ export default {
     hostingPort: 5000,
     apiSettings: {
         enabledApi: true,
-        apiUrl: "http://10.2.189.51:7300",
-        authUrl: "http://10.2.189.51:7303",
+        apiUrl: "http://10.2.189.51:7310",
+        authUrl: "http://10.2.189.51:7313",
         client: {
             id: "game-server",
             secret: "gameserver@20luminet&",
@@ -14,9 +14,9 @@ export default {
         enabledApiLogs: true,
     },
     mainServerApiSettings: {
-        url: "http://10.2.189.51:7777/uat/main/api",
+        url: "http://10.2.189.51:7778/uat/main/api",
         auth: {
-            url: "http://10.2.189.51:7303",
+            url: "http://10.2.189.51:7313",
             id: "game-services",
             secret: "gameservices@20luminet&",
         },
@@ -32,7 +32,7 @@ export default {
     },
     enabledLogs: true,
     database: {
-        url: "mongodb://lmn_backend:LmnBackend%4022027@10.99.99.187:27201/?replicaSet=SabaUAT",
+        url: "mongodb://lmn_backend:LmnBackend%4022027@10.99.99.187:37201/?replicaSet=SabaL2UAT",
         options: {
             dbName: "minigame",
             useNewUrlParser: true,
@@ -41,7 +41,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://72bd0e28026f4a46b818ecb9c3a13eae@10.99.99.187:800/177",
+        sentryUrl: "http://3fc3af5497e84f2e8752baba8a4d91a6@10.99.99.187:800/201",
         logIdentifier: "sicbo",
         env: "UAT",
     },
@@ -50,5 +50,12 @@ export default {
     },
     adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
     enableCorsWs: true,
-    corsUrls: ["http://uat.sabagame.com", "https://uat.sabagame.com", "http://uat-adm.sabagame.com", "https://uat-adm.sabagame.com"],
+    corsUrls: [
+        "https://uat.sabagame.net",
+        "http://uat.sabagame.net",
+        "http://uat-admg.sabagame.net",
+        "https://uat-admg.sabagame.net",
+        "http://uat-adm.sabagame.net",
+        "https://uat-adm.sabagame.net",
+    ],
 };

@@ -1,4 +1,4 @@
 include:
   - project: "ci/luminet/sicbo-service-ci"
-    ref: L1
+    ref: L2
     file: "gitlab-ci.yml"
