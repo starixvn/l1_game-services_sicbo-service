@@ -17,9 +17,11 @@ export default class ProcessBetQueue extends Core.Cron.ProcessBetQueue {
 
         if (this.gameData.ingame?.[playerName]) {
             const playerInGame = this.gameData.ingame[playerName];
+            const chipAdjustment = decrease ? -1 : 1;
+
             playerInGame.chips = playerInGame.chips ?? {};
             playerInGame.chips[betChoice] = playerInGame.chips[betChoice] ?? {};
-            playerInGame.chips[betChoice][amount] = (playerInGame.chips[betChoice][amount] ?? 0) + 1;
+            playerInGame.chips[betChoice][amount] = (playerInGame.chips[betChoice][amount] ?? 0) + chipAdjustment;
         }
     }
 }
