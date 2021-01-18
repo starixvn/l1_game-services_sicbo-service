@@ -10,8 +10,8 @@ export default class ProcessBetQueue extends Core.Cron.ProcessBetQueue {
         return ownBet;
     }
 
-    adjustBetTracks(playerName, bet) {
-        super.adjustBetTracks(playerName, bet);
+    adjustBetTracks(playerName, bet, decrease = false) {
+        super.adjustBetTracks(playerName, bet, decrease);
 
         const { betChoice, amount } = bet;
 
