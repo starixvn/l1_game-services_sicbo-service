@@ -43,7 +43,7 @@ export default {
     sentry: {
         sentryUrl: "https://c3572873642d4d36ace6ac007c925492@sentryuat.sabagame.com/157",
         logIdentifier: "sicbo",
-        env: "LOCAL",
+        env: "LOCAL-1",
     },
     authenticateSettings: {
         audiences: ["api", "admin-api"],
