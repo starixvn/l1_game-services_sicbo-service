@@ -2,8 +2,8 @@ export default {
     hostingPort: 5000,
     apiSettings: {
         enabledApi: true,
-        apiUrl: "http://l2_game_api_AWS:5000",
-        authUrl: "http://l2_auth_api_AWS:5000",
+        apiUrl: "http://l2_game_api_aws:5000",
+        authUrl: "http://l2_auth_api_aws:5000",
         client: {
             id: "game-server",
             secret: "gameserver@20luminet&",
@@ -14,9 +14,9 @@ export default {
         enabledApiLogs: true,
     },
     mainServerApiSettings: {
-        url: "http://l2_games_server_AWS:5000/api",
+        url: "http://l2_game_server_aws:5000/api",
         auth: {
-            url: "http://l2_auth_api_AWS:5000",
+            url: "http://l2_auth_api_aws:5000",
             id: "game-services",
             secret: "gameservices@20luminet&",
         },
@@ -31,7 +31,7 @@ export default {
     },
     enabledLogs: true,
     database: {
-        url: "mongodb://lmn_backend:ilthODrRz8C4s2%5D%7B%7CLV%3Du%5D2vsf6o%5Ex0m@10.99.99.56:37101/?replicaSet=L2_SabaAWS",
+        url: "mongodb://lmn_backend:ilthODrRz8C4s2%5D%7B%7CLV%3Du%5D2vsf6o%5Ex0m@10.99.99.56:37101/?replicaSet=L2_Sabaaws",
         options: {
             dbName: "minigame",
             useNewUrlParser: true,
@@ -42,7 +42,7 @@ export default {
     sentry: {
         sentryUrl: "http://b3b81aa59eb746f88466fb83b3e3f273@10.99.99.187:803/126",
         logIdentifier: "sicbo",
-        env: "AWS",
+        env: "aws",
     },
     authenticateSettings: {
         audiences: ["api", "admin-api"],
