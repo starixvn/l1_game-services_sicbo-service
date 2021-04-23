@@ -29,6 +29,7 @@ export default {
         pingTimeout: 60 * 1000,
         transports: ["websocket"],
         allowUpgrades: false,
+        perMessageDeflate: false,
     },
     enabledLogs: true,
     database: {
@@ -41,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://5b1d098b6c284a32bfb48d717a1ebf51@sentryuat.sabagame.com/199",
+        sentryUrl: "https://acb36eb835d948d68c1aad9873754d51@sentry.lumigame.com/27",
         logIdentifier: "sicbo",
         env: "LOCAL_1",
     },

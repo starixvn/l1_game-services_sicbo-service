@@ -29,6 +29,7 @@ export default {
         pingTimeout: 60 * 1000,
         transports: ["websocket"],
         allowUpgrades: false,
+        perMessageDeflate: false,
     },
     enabledLogs: true,
     database: {
@@ -42,7 +43,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://b3b81aa59eb746f88466fb83b3e3f273@10.99.99.187:803/126",
+        sentryUrl: "http://2b5b82bf699543ddb296364568bc30be@10.99.99.187:803/52",
         logIdentifier: "sicbo",
         env: "PROD",
     },
