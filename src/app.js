@@ -1,12 +1,9 @@
 import { Core } from "sc-game-base";
 
 import appConfigs from "./app-configs";
-import { SettleGameRoundConsumer } from "./consumers";
-import { Bot, GameCron, ProcessBetQueue } from "./crons";
 import gameSettings from "./game-settings";
 import { DiceRandom } from "./helpers";
-import { betLogs, bets, rounds } from "./models";
-import Startup from "./startup";
+import SicboContainerRegistry from "./sicbo-container-registry";
 
 const generateResult = () => {
     return { dice1: DiceRandom.random(), dice2: DiceRandom.random(), dice3: DiceRandom.random() };
@@ -101,13 +98,11 @@ const getSettlementResult = (roundResult) => {
 };
 
 const run = async () => {
+    const definition = new Core.GameDefinition(gameSettings, generateResult, getSettlementResult);
     const gameData = new Core.GameData(gameSettings.durations.wholeRound);
 
-    const definition = new Core.GameDefinition(gameSettings, generateResult, getSettlementResult, rounds, bets, betLogs);
-
-    const gameCron = new GameCron(definition, gameData, new Bot(definition, gameData), new SettleGameRoundConsumer(definition, gameData));
-    const startup = new Startup(appConfigs, definition, gameData, gameCron, new ProcessBetQueue(definition, gameData));
-    const app = new Core.BaseGameApp(appConfigs, definition, gameData, startup);
+    const container = new SicboContainerRegistry().register(appConfigs, definition, gameData);
+    const app = new Core.BaseGameApp(container);
 
     await app.run();
 };

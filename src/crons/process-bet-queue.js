@@ -1,6 +1,6 @@
 import { Core } from "sc-game-base";
 
-export default class ProcessBetQueue extends Core.Cron.ProcessBetQueue {
+export default class ProcessBetQueue extends Core.Crons.ProcessBetQueue {
     generatePlacingBetResult(player, balance, bet) {
         const { betChoice, amount } = bet;
         const ownBet = super.generatePlacingBetResult(player, balance, bet);
