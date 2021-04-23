@@ -1,5 +1,5 @@
-import Bot from "./bot";
-import GameCron from "./game-cron";
-import ProcessBetQueue from "./process-bet-queue";
+import SicboBot from "./bot";
+import SicboGameCron from "./game-cron";
+import SicboProcessBetQueue from "./process-bet-queue";
 
-export { Bot, GameCron, ProcessBetQueue };
+export { SicboBot, SicboGameCron, SicboProcessBetQueue };

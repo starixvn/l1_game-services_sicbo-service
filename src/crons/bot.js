@@ -3,7 +3,7 @@ import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
-export default class Bot extends Core.BaseBot {
+export default class Bot extends Core.Crons.BaseBot {
     constructor(definition, gameData) {
         super(definition, gameData, null);
 
