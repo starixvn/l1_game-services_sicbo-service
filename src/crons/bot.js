@@ -4,8 +4,8 @@ import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
 export default class Bot extends Core.Crons.BaseBot {
-    constructor(definition, gameData) {
-        super(definition, gameData, null);
+    constructor(definition, gameData, userInfosRepository) {
+        super(definition, gameData, userInfosRepository);
 
         this.betChoiceRatio = { MainOpts: 52, SubOpts: 30, AnyTripleOpts: 2, TotalOpts1: 10, TotalOpts2: 6 };
 
