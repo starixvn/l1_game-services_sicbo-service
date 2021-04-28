@@ -2,8 +2,8 @@ export default {
     hostingPort: 5000,
     apiSettings: {
         enabledApi: true,
-        apiUrl: "http://l2-api.lumigame.com",
-        authUrl: "http://l2-auth.lumigame.com",
+        apiUrl: "http://l2_game_api_local:5000",
+        authUrl: "http://l2_auth_api_local:5000",
         client: {
             id: "game-server",
             secret: "gameserver@20luminet&",
@@ -14,9 +14,9 @@ export default {
         enabledApiLogs: true,
     },
     mainServerApiSettings: {
-        url: "http://haproxy.lumigame.com:7001/main/api",
+        url: "http://l2_game_server_local:5000/api",
         auth: {
-            url: "http://l2-auth.lumigame.com",
+            url: "http://l2_auth_api_local:5000",
             id: "game-services",
             secret: "gameservices@20luminet&",
         },
@@ -29,6 +29,7 @@ export default {
         pingTimeout: 60 * 1000,
         transports: ["websocket"],
         allowUpgrades: false,
+        perMessageDeflate: false,
     },
     enabledLogs: true,
     database: {
@@ -41,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://5b1d098b6c284a32bfb48d717a1ebf51@sentryuat.sabagame.com/199",
+        sentryUrl: "https://acb36eb835d948d68c1aad9873754d51@sentry.lumigame.com/27",
         logIdentifier: "sicbo",
         env: "LOCAL",
     },

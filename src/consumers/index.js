@@ -1,5 +1,5 @@
-import InGameConsumer from "./in-game-consumer";
-import PlaceBetConsumer from "./place-bet-consumer";
-import SettleGameRoundConsumer from "./settle-game-round-consumer";
+import SicboInGameConsumer from "./in-game-consumer";
+import SicboPlaceBetConsumer from "./place-bet-consumer";
+import SicboSettleGameRoundConsumer from "./settle-game-round-consumer";
 
-export { PlaceBetConsumer, SettleGameRoundConsumer, InGameConsumer };
+export { SicboPlaceBetConsumer, SicboSettleGameRoundConsumer, SicboInGameConsumer };
