@@ -42,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://57fea4e7edf74feaa75a014b6de375d0@sentryuat.sabagame.com/184",
+        sentryUrl: "https://13f39b8359404ed5aec23655e64ccf78@sentry.lumigame.com/2",
         logIdentifier: "sicbo",
         env: "LOCAL-1",
     },
