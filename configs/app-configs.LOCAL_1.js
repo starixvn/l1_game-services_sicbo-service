@@ -42,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "https://c3572873642d4d36ace6ac007c925492@sentryuat.sabagame.com/157",
+        sentryUrl: "https://13f39b8359404ed5aec23655e64ccf78@sentry.lumigame.com/2",
         logIdentifier: "sicbo",
         env: "LOCAL-1",
     },
@@ -51,5 +51,5 @@ export default {
     },
     adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
     enableCorsWs: true,
-    corsUrls: ["http://localhost:7456", "http://localhost:7000", "http://l1-games1.lumigame.com", "http://l1-admin1.lumigame.com"],
+    corsUrls: ["https://localhost:7456", "https://localhost:7000", "https://l1-games1.lumigame.com", "https://l1-admin1.lumigame.com"],
 };

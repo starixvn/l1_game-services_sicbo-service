@@ -42,7 +42,7 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://21dff28ef328433699a38b0053b8d016@10.99.99.187:800/176",
+        sentryUrl: "http://52368c4019044019885440599c180bda@10.99.99.187:800/24",
         logIdentifier: "sicbo",
         env: "SIT",
     },
