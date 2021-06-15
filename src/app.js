@@ -7,7 +7,7 @@ import SicboContainerRegistry from "./sicbo-container-registry";
 
 
 const run = async () => {
-    const definition = new Core.GameDefinition(gameSettings, generateResultlt, getSettlementResulttlementResult);
+    const definition = new Core.GameDefinition(gameSettings, generateResult, getSettlementResult);
     const gameData = new Core.GameData(gameSettings.durations.wholeRound);
 
     const container = new SicboContainerRegistry().register(appConfigs, definition, gameData);
