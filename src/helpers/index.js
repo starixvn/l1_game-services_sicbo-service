@@ -1,3 +1,3 @@
-import * as DiceRandom from "./dice-random";
+import { generateResult, getSettlementResult } from "./result-helper";
 
-export { DiceRandom };
+export { generateResult, getSettlementResult };

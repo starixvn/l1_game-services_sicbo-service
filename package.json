@@ -4,7 +4,8 @@
     "description": "",
     "main": "./src/app.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "jest",
+        "test-coverage": "jest --collect-coverage",
         "dev": "nodemon --es-module-specifier-resolution=node --watch ./src ./src/app.js",
         "debug": "nodemon --es-module-specifier-resolution=node --watch ./ --inspect ./src/app.js",
         "prod": "node --max-old-space-size=8192 --es-module-specifier-resolution=node ./src/app.js",
@@ -25,6 +26,7 @@
         "sc-game-base": "~1.23.0"
     },
     "devDependencies": {
+        "@babel/preset-env": "^7.14.5",
         "@commitlint/cli": "^9.1.2",
         "@commitlint/config-conventional": "^9.1.2",
         "@semantic-release/changelog": "^5.0.1",
@@ -33,8 +35,14 @@
         "@semantic-release/gitlab": "^6.0.4",
         "@semantic-release/npm": "^7.0.5",
         "@semantic-release/release-notes-generator": "^9.0.1",
+        "@types/jest": "^26.0.23",
+        "babel-jest": "^27.0.2",
         "husky": "^4.2.5",
         "install": "^0.13.0",
+        "jest": "^27.0.4",
+        "jest-extended": "^0.11.5",
+        "jest-micro-auto-stub": "^1.0.5",
+        "jest-sonar-reporter": "^2.0.0",
         "sc-semantic-release": "^1.1.0",
         "semantic-release": "^17.1.1"
     },
@@ -42,5 +50,10 @@
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
         }
+    },
+    "jestSonar": {
+        "reportPath": "reports",
+        "reportFile": "test-reporter.xml",
+        "indent": 4
     }
 }
