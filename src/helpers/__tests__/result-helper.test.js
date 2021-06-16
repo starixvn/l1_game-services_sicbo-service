@@ -1,5 +1,5 @@
 import { getSettlementResult, generateResult } from "../result-helper";
-import testData from "../test-data";
+import testData from "./test-data.json";
 
 describe("getSettlementResult tests", () => {
   
