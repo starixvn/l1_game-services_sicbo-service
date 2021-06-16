@@ -1,9 +1,10 @@
 import Chance from "chance";
 import randomLib1 from "random";
-import {Random, MersenneTwister19937} from "random-js";
+import { Random, MersenneTwister19937 } from "random-js";
+import { randomInt } from "crypto";
 
 const random1 = () => {
-    return Math.floor(Math.random() * 6) + 1;
+    return randomInt(1, 6);
 };
 const random2 = () => {
     const chance = new Chance();
@@ -32,7 +33,6 @@ const random = () => {
 
     return randomFunction();
 };
-
 
 const sum = (total, num) => {
     return total + num;
@@ -111,7 +111,6 @@ const settlementRuleEntries = Object.entries({
         return total === 17;
     },
 });
-
 
 const generateResult = () => {
     return { dice1: random(), dice2: random(), dice3: random() };
