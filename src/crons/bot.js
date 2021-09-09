@@ -1,5 +1,4 @@
 import Chance from "chance";
-import { userInfos } from "sc-base-database";
 import { helpers } from "sc-common";
 import { Core } from "sc-game-base";
 
@@ -29,7 +28,7 @@ export default class Bot extends Core.Crons.BaseBot {
         const configs = this.gameData.gameConfigs;
 
         if (configs?.botenabled) {
-            const bots = await userInfos.find({ type: true, disabled: false }, "id name red").lean().exec();
+            const bots = await this.userInfosRepository.find({ type: true, disabled: false }, "id name red").lean().exec();
             this.botList = this.chance.shuffle(bots).slice(0, this.maxNumberOfBots);
         } else {
             this.botList = [];
@@ -45,7 +44,7 @@ export default class Bot extends Core.Crons.BaseBot {
             const maxBotRandom = this.botList.length / this.gameData.remainingTime;
             const botsToBet = this.chance.integer({ min: (maxBotRandom * 2) / 3, max: maxBotRandom });
 
-            let botsToRemove = [];
+            const botsToRemove = [];
 
             for (let i = 0; i < botsToBet; i++) {
                 const bot = this.botList[i];
@@ -159,15 +158,13 @@ export default class Bot extends Core.Crons.BaseBot {
 
         const underRatioGroups = helpers.arrayHelper.shuffle(betChoiceRatios.filter((data) => data.underBetRatio));
 
-        const choice =
-            underRatioGroups.length > 0
-                ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
-                : this.getRandomChoiceFromGroup(this.mainOpts);
-
-        return choice;
+        return underRatioGroups.length > 0
+            ? this.getRandomChoiceFromGroup(underRatioGroups[0].group)
+            : this.getRandomChoiceFromGroup(this.mainOpts);
     }
 
     getMaxBet(bot, choice) {
+        debugger;
         const gameConfigs = this.gameData.gameConfigs;
         const minBet = this.getMinBet();
         const maxBetPerChoice = gameConfigs.choices_maxbet[choice];
@@ -196,13 +193,6 @@ export default class Bot extends Core.Crons.BaseBot {
     getTotalAmountOnChoiceGroup(choices) {
         let total = 0;
         choices.forEach((choice) => (total += this.allBets[choice]));
-
-        return total;
-    }
-
-    getTotalAmountOfBotOnChoiceGroup(bot, choices) {
-        let total = 0;
-        choices.forEach((choice) => (total += bot.betOnChoices[choice]));
 
         return total;
     }
