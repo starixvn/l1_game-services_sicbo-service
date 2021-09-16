@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+    <file path="G:\Source\sicbo-service\src\consumers\__tests__\in-game-consumer.test.js">
+        <testCase name="build payload tests should return object with chips" duration="2"/>
+        <testCase name="build payload tests should return chips empty object when gameData has no data" duration="1"/>
+    </file>
+</testExecutions>
