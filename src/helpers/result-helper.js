@@ -1,10 +1,9 @@
 import Chance from "chance";
 import randomLib1 from "random";
 import { Random, MersenneTwister19937 } from "random-js";
-import { randomInt } from "crypto";
 
 const random1 = () => {
-    return randomInt(1, 6);
+    return Math.floor(Math.random() * 6) + 1;
 };
 const random2 = () => {
     const chance = new Chance();
@@ -125,4 +124,5 @@ const getSettlementResult = (roundResult) => {
         return result;
     }, {});
 };
+
 export { generateResult, getSettlementResult };
