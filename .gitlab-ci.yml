@@ -1,3 +1,6 @@
+variables:
+  SMOKE_PRODUCT_NAME: BigSmallSicBo
+
 include:
   - project: "ci/repos-ci/pentagon_l1_sicbo_service"
     ref: master
