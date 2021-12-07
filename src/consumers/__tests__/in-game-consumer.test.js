@@ -70,6 +70,15 @@ gameData.gameConfigs = {
     },
     enableFreeBet: false,
 };
+gameData.exchangeRates = {
+    exId: 1,
+    code: {
+        USD: 1,
+        VND: 0.00004405,
+        IDR: 0.07099,
+    },
+};
+
 describe("build payload tests", () => {
     it("should return object with chips", async () => {
         userInfosRepository.findOne().lean().exec.mockReturnValueOnce({});
@@ -78,6 +87,11 @@ describe("build payload tests", () => {
         const realPlayer = {
             profile: {
                 name: "player01",
+            },
+            session: {
+                currencyCode: "USD",
+                multiplier: 1,
+                currencyGroupId: 1,
             },
         };
         gameData.ingame[realPlayer.profile.name] = {
@@ -105,6 +119,11 @@ describe("build payload tests", () => {
             profile: {
                 name: "player01",
             },
+            session: {
+                currencyCode: "USD",
+                multiplier: 1,
+                currencyGroupId: 1,
+            },
         };
 
         const consumer = new InGameConsumer(definition, gameData, roundQuery, null, getBalance, userInfosRepository);
@@ -115,5 +134,5 @@ describe("build payload tests", () => {
 
     afterEach(() => {
         gameData.ingame = {};
-    })
+    });
 });
