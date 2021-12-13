@@ -1,9 +1,10 @@
 import Chance from "chance";
 import randomLib1 from "random";
 import { Random, MersenneTwister19937 } from "random-js";
+import { randomInt } from "crypto";
 
 const random1 = () => {
-    return Math.floor(Math.random() * 6) + 1;
+    return randomInt(1, 7);
 };
 const random2 = () => {
     const chance = new Chance();
