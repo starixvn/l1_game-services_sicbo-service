@@ -57,4 +57,5 @@ export default {
         total16: 22,
         total17: 23,
     },
+    hedgeBetGroups: [["big", "small"]],
 };
