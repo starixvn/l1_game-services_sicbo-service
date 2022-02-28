@@ -1,15 +1,6 @@
 import Chance from "chance";
 import randomLib1 from "random";
 import { Random, MersenneTwister19937 } from "random-js";
-import { randomInt } from "crypto";
-
-const random1 = () => {
-    return randomInt(1, 7);
-};
-const random2 = () => {
-    const chance = new Chance();
-    return chance.d6();
-};
 
 const random3 = () => {
     const chance = new Chance();
@@ -25,11 +16,11 @@ const random5 = () => {
     return randomJS.integer(1, 6);
 };
 
-const randomFunctions = [random1, random2, random3, random4, random5];
+const randomFunctions = [random3, random4, random5];
 
 const random = () => {
-    const chance = new Chance();
-    const randomFunction = chance.pickone(randomFunctions);
+    const selectedRandomMethodIndex = Math.floor(Math.random() * randomFunctions.length);
+    const randomFunction = randomFunctions[selectedRandomMethodIndex];
 
     return randomFunction();
 };
