@@ -1,6 +1,15 @@
 import Chance from "chance";
 import randomLib1 from "random";
 import { Random, MersenneTwister19937 } from "random-js";
+import { randomInt } from "crypto";
+
+const random1 = () => {
+    return randomInt(1, 7);
+};
+const random2 = () => {
+    const chance = new Chance();
+    return chance.d6();
+};
 
 const random3 = () => {
     const chance = new Chance();
@@ -16,13 +25,30 @@ const random5 = () => {
     return randomJS.integer(1, 6);
 };
 
-const randomFunctions = [random3, random4, random5];
+const groups = {
+    1: [random3, random4, random5],
+    2: [random1, random2, random3, random4, random5],
+};
 
-const random = () => {
-    const selectedRandomMethodIndex = Math.floor(Math.random() * randomFunctions.length);
-    const randomFunction = randomFunctions[selectedRandomMethodIndex];
+const random = (mode = 1) => {
+    const selectedRandomMethodIndex = Math.floor(Math.random() * groups[mode].length);
+    const randomFunction = groups[mode][selectedRandomMethodIndex];
 
     return randomFunction();
+};
+
+const generateResult = (mode = 1) => {
+    return { dice1: random(), dice2: random(), dice3: random() };
+};
+
+const getSettlementResult = (roundResult) => {
+    const resultArray = Object.values(roundResult);
+
+    return settlementRuleEntries.reduce((result, [choice, rule]) => {
+        result[choice] = rule(resultArray);
+
+        return result;
+    }, {});
 };
 
 const sum = (total, num) => {
@@ -102,19 +128,5 @@ const settlementRuleEntries = Object.entries({
         return total === 17;
     },
 });
-
-const generateResult = () => {
-    return { dice1: random(), dice2: random(), dice3: random() };
-};
-
-const getSettlementResult = (roundResult) => {
-    const resultArray = Object.values(roundResult);
-
-    return settlementRuleEntries.reduce((result, [choice, rule]) => {
-        result[choice] = rule(resultArray);
-
-        return result;
-    }, {});
-};
 
 export { generateResult, getSettlementResult };
