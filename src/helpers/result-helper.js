@@ -38,7 +38,7 @@ const random = (mode = 1) => {
 };
 
 const generateResult = (mode = 1) => {
-    return { dice1: random(), dice2: random(), dice3: random() };
+    return { dice1: random(mode), dice2: random(mode), dice3: random(mode) };
 };
 
 const getSettlementResult = (roundResult) => {
