@@ -25,9 +25,28 @@ const random5 = () => {
     return randomJS.integer(1, 6);
 };
 
+const random6 = () => {
+    const seed = Math.floor(Math.random() * 100000);
+    const randomJS = new Random(MersenneTwister19937.seed(seed));
+    return randomJS.integer(1, 6);
+};
+
+const random7 = () => {
+    const seeds = [
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 100),
+        Math.floor(Math.random() * 1000),
+        Math.floor(Math.random() * 10000),
+        Math.floor(Math.random() * 100000),
+    ];
+    const randomJS = new Random(MersenneTwister19937.seedWithArray(seeds));
+    return randomJS.integer(1, 6);
+};
+
 const groups = {
     1: [random3, random4, random5],
     2: [random1, random2, random3, random4, random5],
+    3: [random6, random7],
 };
 
 const random = (mode = 1) => {
