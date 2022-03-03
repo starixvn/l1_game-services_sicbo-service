@@ -148,4 +148,4 @@ const settlementRuleEntries = Object.entries({
     },
 });
 
-export { generateResult, getSettlementResult };
+export { generateResult, getSettlementResult, groups };
