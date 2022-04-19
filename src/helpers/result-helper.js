@@ -126,4 +126,8 @@ const getSettlementResult = (roundResult) => {
     }, {});
 };
 
-export { generateResult, getSettlementResult };
+const generateRawResultForHash = (roundResult) => {
+    return `{${+roundResult.dice1},${+roundResult.dice2},${+roundResult.dice3}}`;
+};
+
+export { generateResult, getSettlementResult, generateRawResultForHash };

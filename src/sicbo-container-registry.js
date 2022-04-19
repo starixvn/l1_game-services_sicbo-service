@@ -3,7 +3,7 @@ import { Core, Table } from "sc-game-base";
 
 import { SicboInGameConsumer, SicboPlaceBetConsumer, SicboSettleGameRoundConsumer } from "./consumers";
 import { SicboBot, SicboGameCron, SicboProcessBetQueue } from "./crons";
-import { SicboBetLogs, SicboBets, SicboRounds } from "./models";
+import { SicboBetLogs, SicboBets, SicboRounds, SicboResults } from "./models";
 
 const { asClass, asValue } = awilix;
 
@@ -15,6 +15,7 @@ export default class SicboContainerRegistry extends Core.ContainerRegistry {
             roundsRepository: asValue(SicboRounds),
             betsRepository: asValue(SicboBets),
             betLogsRepository: asValue(SicboBetLogs),
+            resultsRepository: asValue(SicboResults),
         });
     }
 
