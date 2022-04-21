@@ -1,38 +1,4 @@
-import Chance from "chance";
-import randomLib1 from "random";
-import { Random, MersenneTwister19937 } from "random-js";
-import { randomInt } from "crypto";
-
-const random1 = () => {
-    return randomInt(1, 7);
-};
-const random2 = () => {
-    const chance = new Chance();
-    return chance.d6();
-};
-
-const random3 = () => {
-    const chance = new Chance();
-    return chance.integer({ min: 1, max: 6 });
-};
-
-const random4 = () => {
-    return randomLib1.int(1, 6);
-};
-
-const random5 = () => {
-    const randomJS = new Random(MersenneTwister19937.autoSeed());
-    return randomJS.integer(1, 6);
-};
-
-const randomFunctions = [random1, random2, random3, random4, random5];
-
-const random = () => {
-    const chance = new Chance();
-    const randomFunction = chance.pickone(randomFunctions);
-
-    return randomFunction();
-};
+import { random } from "./random-helper";
 
 const sum = (total, num) => {
     return total + num;
@@ -112,8 +78,13 @@ const settlementRuleEntries = Object.entries({
     },
 });
 
-const generateResult = () => {
-    return { dice1: random(), dice2: random(), dice3: random() };
+const generateResult = (mode) => {
+    const selectedMode = mode >= 1 && mode <= 3 ? mode : 1;
+    const dice1 = random(selectedMode);
+    const dice2 = random(selectedMode);
+    const dice3 = random(selectedMode);
+
+    return { dice1, dice2, dice3 };
 };
 
 const getSettlementResult = (roundResult) => {
