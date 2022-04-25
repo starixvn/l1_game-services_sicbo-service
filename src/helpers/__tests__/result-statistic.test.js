@@ -25,19 +25,16 @@ describe("Result statistic: 100000 times", () => {
 
             // assert
             const resultPercentage = Object.keys(statisticResult).reduce((percentage, key) => {
-                percentage[key] = +parseFloat((statisticResult[key] / total) * 100).toFixed(2);
+                percentage[key] = +parseFloat(((statisticResult[key] / total) * 100) / 3).toFixed(2);
 
                 return percentage;
             }, {});
             console.log(
                 `Mode:${index + 1}, countResult: ${JSON.stringify(statisticResult)}, percentageResult: ${JSON.stringify(resultPercentage)}`
             );
-            expect(resultPercentage[1]).toBeGreaterThanOrEqual(49);
-            expect(resultPercentage[2]).toBeGreaterThanOrEqual(49);
-            expect(resultPercentage[3]).toBeGreaterThanOrEqual(49);
-            expect(resultPercentage[4]).toBeGreaterThanOrEqual(49);
-            expect(resultPercentage[5]).toBeGreaterThanOrEqual(49);
-            expect(resultPercentage[6]).toBeGreaterThanOrEqual(49);
+            Object.values(resultPercentage).forEach((value) => {
+                expect(value).toBeGreaterThanOrEqual(16);
+            });
         });
     }
 });
