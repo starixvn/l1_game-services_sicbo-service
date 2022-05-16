@@ -190,50 +190,77 @@ describe("calculateBetResult test", () => {
 });
 
 describe("settle bet tests", () => {
-    it("should only call roundpublisher when there is no bet", async () => {
-        execMockFunc.mockReturnValueOnce([]);
-        const consumer = initConsumer();
-        await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
-        expect(roundResultPublisher.publishRoundResult).toHaveBeenCalled();
-        expect(userBetResultPublisher.publish).not.toHaveBeenCalled();
+    describe(" when there is no bet", () => {
+        it("should call roundpublisher", async () => {
+            execMockFunc.mockReturnValueOnce([]);
+            const consumer = initConsumer();
+            await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
+            expect(roundResultPublisher.publishRoundResult).toHaveBeenCalled();
+        });
+
+        it("should not  call userBetResultPublisher", async () => {
+            execMockFunc.mockReturnValueOnce([]);
+            const consumer = initConsumer();
+            await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
+            expect(userBetResultPublisher.publish).not.toHaveBeenCalled();
+        });
     });
 
-    it("should call endgame, roundpublisher and user bet publisher when there is  bet", async () => {
-        endGame.mockReturnValueOnce({ isOk: true });
-        execMockFunc.mockImplementationOnce(() => [
-            {
-                specific1: 1,
-                specific2: 0,
-                specific3: 0,
-                specific4: 0,
-                specific5: 0,
-                specific6: 0,
-                big: 0,
-                small: 0,
-                anyTriple: 0,
-                total4: 1,
-                total5: 0,
-                total6: 0,
-                total7: 0,
-                total8: 0,
-                total9: 0,
-                total10: 0,
-                total11: 0,
-                total12: 0,
-                total13: 0,
-                total14: 0,
-                total15: 0,
-                total16: 0,
-                total17: 0,
-                save: function () {},
-            },
-        ]);
-        const consumer = initConsumer();
+    describe("when there is  bet", () => {
+        beforeEach(() => {
+            endGame.mockReturnValueOnce({ isOk: true });
+            execMockFunc.mockImplementationOnce(() => [
+                {
+                    specific1: 1,
+                    specific2: 0,
+                    specific3: 0,
+                    specific4: 0,
+                    specific5: 0,
+                    specific6: 0,
+                    big: 0,
+                    small: 0,
+                    anyTriple: 0,
+                    total4: 1,
+                    total5: 0,
+                    total6: 0,
+                    total7: 0,
+                    total8: 0,
+                    total9: 0,
+                    total10: 0,
+                    total11: 0,
+                    total12: 0,
+                    total13: 0,
+                    total14: 0,
+                    total15: 0,
+                    total16: 0,
+                    total17: 0,
+                    save: function () {},
+                },
+            ]);
+        });
 
-        await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
+        it("should call endgame", async () => {
+            const consumer = initConsumer();
 
-        expect(endGame).toHaveBeenCalled();
-        expect(roundResultPublisher.publishRoundResult).toHaveBeenCalled();
-        expect(userBetResultPublisher.publish).toHaveBeenCalled();
+            await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
+
+            expect(endGame).toHaveBeenCalled();
+        });
+
+        it("should call roundpublisher ", async () => {
+            const consumer = initConsumer();
+
+            await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
+
+            expect(roundResultPublisher.publishRoundResult).toHaveBeenCalled();
+        });
+
+        it("should call user bet publisher", async () => {
+            const consumer = initConsumer();
+
+            await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
+
+            expect(userBetResultPublisher.publish).toHaveBeenCalled();
+        });
     });
 });

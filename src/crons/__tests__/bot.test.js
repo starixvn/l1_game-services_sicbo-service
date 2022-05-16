@@ -87,26 +87,89 @@ describe("reset tests", () => {
 });
 
 describe("place bet tests", () => {
-    it("should update data correctly", async () => {
+    beforeEach(() => {
         findExecMockFunction.mockReturnValueOnce(botPlayers);
-        const bot = new SicBoBot(definition, gameData, userInfosRepository);
-        await bot.reset();
-        bot.placeBet(botPlayers[0]);
-        expect(bot.totalTickets).toEqual(1);
-        expect(bot.smallTickets).toEqual(1);
-        expect(Object.values(bot.allBets).some((amount) => amount > 0)).toBeTrue();
+    });
+    describe("when successful bet", () => {
+        it("should update totalTickets", async () => {
+            // arrange
+            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            await bot.reset();
+
+            // act
+            bot.placeBet(botPlayers[0]);
+
+            // arrange
+            expect(bot.totalTickets).toEqual(1);
+        });
+
+        it("should update smallTickets", async () => {
+            // arrange
+            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            await bot.reset();
+
+            // act
+            bot.placeBet(botPlayers[0]);
+
+            // arrange
+            expect(bot.smallTickets).toEqual(1);
+        });
+
+        it("should update allBets", async () => {
+            // arrange
+            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            await bot.reset();
+
+            // act
+            bot.placeBet(botPlayers[0]);
+
+            // arrange
+            expect(Object.values(bot.allBets).some((amount) => amount > 0)).toBeTrue();
+        });
     });
 
-    it("shouldnt update data during locking bet time", async () => {
-        findExecMockFunction.mockReturnValueOnce(botPlayers);
-        const bot = new SicBoBot(definition, gameData, userInfosRepository);
-        gameData.remainingTime = gameSettings.durations.lockingBet - 1;
-        await bot.reset();
-        bot.placeBet(botPlayers[0]);
-        expect(bot.totalTickets).toEqual(0);
-        expect(bot.smallTickets).toEqual(0);
-        expect(Object.values(bot.allBets).every((amount) => amount === 0)).toBeTrue();
-        gameData.remainingTime = gameSettings.durations.placingBets - 1;
+    describe("when locking bet time", () => {
+        afterEach(() => {
+            gameData.remainingTime = gameSettings.durations.placingBets - 1;
+        });
+        it("shouldnt update totalTickets", async () => {
+            // arrange
+            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            gameData.remainingTime = gameSettings.durations.lockingBet - 1;
+            await bot.reset();
+
+            // act
+            bot.placeBet(botPlayers[0]);
+
+            // arrange
+            expect(bot.totalTickets).toEqual(0);
+        });
+
+        it("shouldnt update smallTickets", async () => {
+            // arrange
+            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            gameData.remainingTime = gameSettings.durations.lockingBet - 1;
+            await bot.reset();
+
+            // act
+            bot.placeBet(botPlayers[0]);
+
+            // arrange
+            expect(bot.smallTickets).toEqual(0);
+        });
+
+        it("shouldnt update allBets", async () => {
+            // arrange
+            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            gameData.remainingTime = gameSettings.durations.lockingBet - 1;
+            await bot.reset();
+
+            // act
+            bot.placeBet(botPlayers[0]);
+
+            // arrange
+            expect(Object.values(bot.allBets).every((amount) => amount === 0)).toBeTrue();
+        });
     });
 });
 

@@ -1,3 +1,3 @@
-import { generateResult, getSettlementResult } from "./result-helper";
+import { generateResult, getSettlementResult, generateRawResultForHash } from "./result-helper";
 
-export { generateResult, getSettlementResult };
+export { generateResult, getSettlementResult, generateRawResultForHash };
