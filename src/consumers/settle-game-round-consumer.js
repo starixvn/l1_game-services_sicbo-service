@@ -3,6 +3,13 @@ import { Core } from "sc-game-base";
 import constants from "../constants";
 
 export default class SettleGameRoundConsumer extends Core.BaseEventConsumers.SettleGameRoundConsumer {
+    generateResult() {
+        const resultFromAdmin = this.gameData.settlementResultFromAdmin;
+        const { randomMode } = this.gameData.gameConfigs;
+
+        return this.gameData.roundId === resultFromAdmin.roundId ? resultFromAdmin.result : this.definition.generateResult(randomMode);
+    }
+
     async settleBets({ result, settlementResult, roundId, time }) {
         const bets = await this.queryBets(roundId);
 
@@ -15,6 +22,7 @@ export default class SettleGameRoundConsumer extends Core.BaseEventConsumers.Set
 
                     bet.betwin = betResult.totalWin;
                     bet.thanhtoan = true;
+                    bet.paid = true;
 
                     await bet.save();
                     await this.callEndGame(bet, roundId, time, betResult);
