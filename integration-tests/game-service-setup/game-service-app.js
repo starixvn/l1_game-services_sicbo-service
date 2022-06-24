@@ -1,5 +1,5 @@
 import { Core } from "sc-game-base";
-import { initAPIStub } from "sc-game-service-integration-utils";
+import { initAPIStub, stubUserService } from "sc-game-service-integration-utils";
 
 import appConfigs from "./../../src/app-configs.IGT";
 import SicboContainerRegistry from "./../../src/sicbo-container-registry";
@@ -8,6 +8,8 @@ import * as resultHelper from "./../../src/helpers";
 
 export const run = async () => {
     initAPIStub(appConfigs.apiSettings.apiUrl);
+    stubUserService(appConfigs);
+
     const definition = new Core.GameDefinition(
         gameSettings,
         resultHelper.generateResult,

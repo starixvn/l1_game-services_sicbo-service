@@ -41,8 +41,6 @@ export const getHistoryTest = () => {
                     freeBet: false,
                     phien: 1190118,
                     roundId: 1190118,
-                    paid: false,
-                    currency: "$US",
                     name: "NormalUser",
                     odds: {
                         single: 2,
@@ -66,7 +64,6 @@ export const getHistoryTest = () => {
                         total16: 31,
                         total17: 61,
                     },
-                    partnerId: "dummy-partner-id",
                     rate: 1,
                     betLogDetails: [],
                 },
@@ -99,8 +96,6 @@ export const getHistoryTest = () => {
                     freeBet: false,
                     phien: 1190119,
                     roundId: 1190119,
-                    paid: false,
-                    currency: "$US",
                     name: "NormalUser",
                     odds: {
                         single: 2,
@@ -124,7 +119,6 @@ export const getHistoryTest = () => {
                         total16: 31,
                         total17: 61,
                     },
-                    partnerId: "dummy-partner-id",
                     rate: 1,
                     betLogDetails: [],
                 },
