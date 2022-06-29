@@ -15,6 +15,7 @@ export default class SettleGameRoundConsumer extends Core.BaseEventConsumers.Set
 
                     bet.betwin = betResult.totalWin;
                     bet.thanhtoan = true;
+                    bet.paid = true;
 
                     await bet.save();
                     await this.callEndGame(bet, roundId, time, betResult);
