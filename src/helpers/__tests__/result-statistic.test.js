@@ -1,4 +1,4 @@
-import { generateResult } from "./../result-helper";
+import { generateResult, getSettlementResult } from "./../result-helper";
 
 describe("Result statistic: 100000 times", () => {
     // arrange
@@ -14,6 +14,9 @@ describe("Result statistic: 100000 times", () => {
                 5: 0,
                 6: 0,
             };
+            const dragonTails = {};
+            let isBig = false;
+            let continuity = 0;
 
             // act
             for (let i = 0; i < total; i++) {
@@ -21,6 +24,23 @@ describe("Result statistic: 100000 times", () => {
                 statisticResult[result.dice1] += 1;
                 statisticResult[result.dice2] += 1;
                 statisticResult[result.dice3] += 1;
+                if (i > 0) {
+                    const settlementResult = getSettlementResult(result);
+                    if (settlementResult.big && isBig) {
+                        continuity++;
+                    } else {
+                        if (settlementResult.small && !isBig) {
+                            continuity++;
+                        } else {
+                            if (continuity >= 4) {
+                                dragonTails[continuity] = dragonTails[continuity] ?? 0;
+                                dragonTails[continuity] += 1;
+                            }
+                            continuity = 0;
+                        }
+                    }
+                    isBig = settlementResult.big ? true : false;
+                }
             }
 
             // assert
@@ -32,9 +52,17 @@ describe("Result statistic: 100000 times", () => {
             console.log(
                 `Mode:${index + 1}, countResult: ${JSON.stringify(statisticResult)}, percentageResult: ${JSON.stringify(resultPercentage)}`
             );
+            console.log(`dragon tails: ${JSON.stringify(dragonTails)}`);
             Object.values(resultPercentage).forEach((value) => {
                 expect(value).toBeGreaterThanOrEqual(16);
             });
+            expect(dragonTails[4]).toBeLessThan(1600);
+            expect(dragonTails[5]).toBeLessThan(800);
+            expect(dragonTails[6]).toBeLessThan(400);
+            expect(dragonTails[7]).toBeLessThan(200);
+            expect(dragonTails[8]).toBeLessThan(100);
+            expect(dragonTails[9]).toBeLessThan(60);
+            expect(dragonTails[10]).toBeLessThan(35);
         });
     }
 });
