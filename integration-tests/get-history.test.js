@@ -39,7 +39,6 @@ export const getHistoryTest = () => {
                     betwin: 20,
 
                     freeBet: false,
-                    phien: 1190118,
                     roundId: 1190118,
                     name: "NormalUser",
                     odds: {
@@ -66,6 +65,7 @@ export const getHistoryTest = () => {
                     },
                     rate: 1,
                     betLogDetails: [],
+                    phien: 1190118,
                 },
                 {
                     specific1: 0,
