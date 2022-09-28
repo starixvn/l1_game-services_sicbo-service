@@ -1,61 +1,223 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\helpers\__tests__\result-helper.test.js">
-        <testCase name="getSettlementResult tests should return correct settlement" duration="3"/>
-        <testCase name="getSettlementResult tests should return correct settlement" duration="0"/>
-        <testCase name="getSettlementResult tests should return correct settlement" duration="1"/>
-        <testCase name="generateResult tests return correctly" duration="2"/>
-    </file>
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\crons\__tests__\game-cron.test.js">
-        <testCase name="isStartingTime tests remaining time = place bet time + shake time, should re turn true" duration="2"/>
-    </file>
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\crons\__tests__\process-bet-queue.test.js">
-        <testCase name="decrease bet tracks test should reduce player&apos;s chips correctly" duration="3"/>
-        <testCase name="decrease bet tracks test should reduce player&apos;s chips correctly" duration="1"/>
-        <testCase name="generatePlacingBetResult tests result should include ownChip" duration="1"/>
-    </file>
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\consumers\__tests__\in-game-consumer.test.js">
-        <testCase name="build payload tests should return object with chips" duration="4"/>
-        <testCase name="build payload tests should return chips empty object when gameData has no data" duration="2"/>
-    </file>
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\consumers\__tests__\place-bet-consumer.test.js">
-        <testCase name="adjustBetTracks test should update player&apos;s chips correctly" duration="3"/>
-        <testCase name="adjustBetTracks test should update player&apos;s chips correctly" duration="1"/>
-        <testCase name="adjustBetTracks test should update player&apos;s chips correctly" duration="0"/>
-        <testCase name="composeBettingTimeValidationCriteria tests remaining is bigger than place bet time, return result containing cannotPlaceBet" duration="1"/>
-        <testCase name="composeBettingTimeValidationCriteria tests remaining is less than locking bet time, return result containing  placeBetNextRound" duration="1"/>
-    </file>
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\consumers\__tests__\settle-game-round-consumer.test.js">
-        <testCase name="calculateBetResult test should calculate bet result correctly" duration="3"/>
-        <testCase name="settle bet tests  when there is no bet should call roundpublisher" duration="1"/>
-        <testCase name="settle bet tests  when there is no bet should not  call userBetResultPublisher" duration="0"/>
-        <testCase name="settle bet tests when there is  bet should call endgame" duration="1"/>
-        <testCase name="settle bet tests when there is  bet should call roundpublisher " duration="0"/>
-        <testCase name="settle bet tests when there is  bet should call user bet publisher" duration="3"/>
-    </file>
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\crons\__tests__\bot.test.js">
-        <testCase name="reset tests bot list should be empty when botenabled is false" duration="5"/>
-        <testCase name="reset tests bot list should have data when botenabled is true" duration="2"/>
-        <testCase name="place bet tests when successful bet should update totalTickets" duration="2"/>
-        <testCase name="place bet tests when successful bet should update smallTickets" duration="2"/>
-        <testCase name="place bet tests when successful bet should update allBets" duration="1"/>
-        <testCase name="place bet tests when locking bet time shouldnt update totalTickets" duration="1"/>
-        <testCase name="place bet tests when locking bet time shouldnt update smallTickets" duration="1"/>
-        <testCase name="place bet tests when locking bet time shouldnt update allBets" duration="0"/>
-        <testCase name="max bet test should return correct max bet with anyTriple Choice" duration="1"/>
-        <testCase name="max bet test should return correct max bet with total Choice" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-    </file>
-    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\src\helpers\__tests__\result-statistic.test.js">
-        <testCase name="Result statistic: 100000 times should generate results statistically correct with mode 1" duration="3341"/>
-        <testCase name="Result statistic: 100000 times should generate results statistically correct with mode 2" duration="2782"/>
-        <testCase name="Result statistic: 100000 times should generate results statistically correct with mode 3" duration="2186"/>
+    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js">
+        <testCase name="signin should receive signed in response" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when user joins game should return game configs" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when user joins game should return user info" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when user joins game should return round history" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when user joins game when join game in placing bet time should return resultHash with hashValue" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when user joins game when join game in settle time should return resultHash with rawValue" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when get history should return history" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="place bet when place bet in placing bet time should return own bet data" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="place bet when place bet NOT in placing bet time should return invalid" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="place bet when get error response from api should return api error" duration="0"/>
+        <testCase name="place bet when API internal server error should return api error" duration="0"/>
+        <testCase name="when settle should return settled status data" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when settle should return settled finish data and hashResult with rawValue" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
+        <testCase name="when settle should return resultHash at start placingBet time" duration="0">
+            <failure message="Error: thrown: &quot;Exceeded timeout of 120000 ms for a hook."><![CDATA[Error: thrown: "Exceeded timeout of 120000 ms for a hook.
+Use jest.setTimeout(newTimeout) to increase the timeout value, if this is a long-running test."
+    at Object.<anonymous> (D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js:10:1)
+    at Runtime._execModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1432:24)
+    at Runtime._loadModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:1034:12)
+    at Runtime.requireModule (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-runtime\build\index.js:866:12)
+    at jestAdapter (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:13)
+    at processTicksAndRejections (internal/process/task_queues.js:95:5)
+    at runTestInternal (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:389:16)
+    at runTest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\runTest.js:481:34)
+    at TestRunner.runTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\jest-runner\build\index.js:111:12)
+    at TestScheduler.scheduleTests (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\TestScheduler.js:333:13)
+    at runJest (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\runJest.js:387:19)
+    at _run10000 (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:408:7)
+    at runCLI (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\node_modules\@jest\core\build\cli\index.js:261:3)
+    at Object.run (D:\Nexcel\Luminet\game-services\sicbo-service\node_modules\jest-cli\build\cli\index.js:163:37)]]></failure>
+        </testCase>
     </file>
 </testExecutions>
