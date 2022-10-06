@@ -15,7 +15,7 @@ const Schema = new mongoose.Schema({
     rate: { type: Number, required: true },
 
     playerId: { type: Number },
-    operatorId: { type: String, required: false },
+    operatorId: { type: String, required: true },
     roundId: { type: Number, default: 0, required: true },
 });
 
