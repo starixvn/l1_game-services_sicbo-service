@@ -71,6 +71,7 @@ const rounds = [
     {
         id: 1190119,
         result: { dice1: 1, dice2: 2, dice3: 5 },
+        exchangeRateId: 1,
         settlementResult: {
             specific1: true,
             specific2: true,
@@ -100,6 +101,7 @@ const rounds = [
     {
         id: 1190118,
         result: { dice1: 3, dice2: 3, dice3: 3 },
+        exchangeRateId: 1,
         settlementResult: {
             specific1: false,
             specific2: false,
@@ -129,6 +131,7 @@ const rounds = [
     {
         id: 1190117,
         result: { dice1: 1, dice2: 4, dice3: 4 },
+        exchangeRateId: 1,
         settlementResult: {
             specific1: true,
             specific2: false,
@@ -189,14 +192,14 @@ const userBetData = (uid) => {
             total17: 0,
             totalAmount: 10,
             betwin: 0,
-            thanhtoan: true,
+            paid: true,
             odds: gameConfig.odds,
-            memberId: 1,
+            playerId: 1,
             siteId: "111",
             freeBet: false,
             currency: "$US",
             rate: 1,
-            partnerId: "dummy-partner-id",
+            operatorId: "dummy-operator-id",
         },
         {
             uid: uid,
@@ -228,14 +231,14 @@ const userBetData = (uid) => {
             total17: 0,
             totalAmount: 10,
             betwin: 20,
-            thanhtoan: true,
+            paid: true,
             odds: gameConfig.odds,
-            memberId: 1,
+            playerId: 1,
             siteId: "111",
             freeBet: false,
             currency: "$US",
             rate: 1,
-            partnerId: "dummy-partner-id",
+            operatorId: "dummy-operator-id",
         },
     ];
 };

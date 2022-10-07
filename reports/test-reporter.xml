@@ -1,61 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-    <file path="D:\l1\1-game-services\sicbo-service\src\helpers\__tests__\result-helper.test.js">
-        <testCase name="getSettlementResult tests should return correct settlement" duration="4"/>
-        <testCase name="getSettlementResult tests should return correct settlement" duration="1"/>
-        <testCase name="getSettlementResult tests should return correct settlement" duration="0"/>
-        <testCase name="generateResult tests return correctly" duration="1"/>
-    </file>
-    <file path="D:\l1\1-game-services\sicbo-service\src\crons\__tests__\game-cron.test.js">
-        <testCase name="isStartingTime tests remaining time = place bet time + shake time, should re turn true" duration="1"/>
-    </file>
-    <file path="D:\l1\1-game-services\sicbo-service\src\consumers\__tests__\in-game-consumer.test.js">
-        <testCase name="build payload tests should return object with chips" duration="4"/>
-        <testCase name="build payload tests should return chips empty object when gameData has no data" duration="2"/>
-    </file>
-    <file path="D:\l1\1-game-services\sicbo-service\src\consumers\__tests__\settle-game-round-consumer.test.js">
-        <testCase name="calculateBetResult test should calculate bet result correctly" duration="5"/>
-        <testCase name="settle bet tests  when there is no bet should call roundpublisher" duration="2"/>
-        <testCase name="settle bet tests  when there is no bet should not  call userBetResultPublisher" duration="1"/>
-        <testCase name="settle bet tests when there is  bet should call endgame" duration="1"/>
-        <testCase name="settle bet tests when there is  bet should call roundpublisher " duration="1"/>
-        <testCase name="settle bet tests when there is  bet should call user bet publisher" duration="11"/>
-    </file>
-    <file path="D:\l1\1-game-services\sicbo-service\src\crons\__tests__\process-bet-queue.test.js">
-        <testCase name="decrease bet tracks test should reduce player&apos;s chips correctly" duration="3"/>
-        <testCase name="decrease bet tracks test should reduce player&apos;s chips correctly" duration="12"/>
-        <testCase name="generatePlacingBetResult tests result should include ownChip" duration="1"/>
-    </file>
-    <file path="D:\l1\1-game-services\sicbo-service\src\consumers\__tests__\place-bet-consumer.test.js">
-        <testCase name="adjustBetTracks test should update player&apos;s chips correctly" duration="3"/>
-        <testCase name="adjustBetTracks test should update player&apos;s chips correctly" duration="0"/>
-        <testCase name="adjustBetTracks test should update player&apos;s chips correctly" duration="1"/>
-        <testCase name="composeBettingTimeValidationCriteria tests remaining is bigger than place bet time, return result containing cannotPlaceBet" duration="0"/>
-        <testCase name="composeBettingTimeValidationCriteria tests remaining is less than locking bet time, return result containing  placeBetNextRound" duration="0"/>
-    </file>
-    <file path="D:\l1\1-game-services\sicbo-service\src\crons\__tests__\bot.test.js">
-        <testCase name="reset tests bot list should be empty when botenabled is false" duration="3"/>
-        <testCase name="reset tests bot list should have data when botenabled is true" duration="1"/>
-        <testCase name="place bet tests when successful bet should update totalTickets" duration="2"/>
-        <testCase name="place bet tests when successful bet should update smallTickets" duration="1"/>
-        <testCase name="place bet tests when successful bet should update allBets" duration="1"/>
-        <testCase name="place bet tests when locking bet time shouldnt update totalTickets" duration="1"/>
-        <testCase name="place bet tests when locking bet time shouldnt update smallTickets" duration="0"/>
-        <testCase name="place bet tests when locking bet time shouldnt update allBets" duration="1"/>
-        <testCase name="max bet test should return correct max bet with anyTriple Choice" duration="2"/>
-        <testCase name="max bet test should return correct max bet with total Choice" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="1"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-        <testCase name="max bet test should return choice&apos;s max bet when small tickets is greater than its raito" duration="0"/>
-    </file>
-    <file path="D:\l1\1-game-services\sicbo-service\src\helpers\__tests__\result-statistic.test.js">
-        <testCase name="Result statistic: 100000 times should generate results statistically correct with mode 1" duration="3536"/>
-        <testCase name="Result statistic: 100000 times should generate results statistically correct with mode 2" duration="2671"/>
-        <testCase name="Result statistic: 100000 times should generate results statistically correct with mode 3" duration="2385"/>
+    <file path="D:\Nexcel\Luminet\game-services\sicbo-service\integration-tests\index.test.js">
+        <testCase name="signin should receive signed in response" duration="88"/>
+        <testCase name="when user joins game should return game configs" duration="108"/>
+        <testCase name="when user joins game should return user info" duration="94"/>
+        <testCase name="when user joins game should return round history" duration="114"/>
+        <testCase name="when user joins game when join game in placing bet time should return resultHash with hashValue" duration="55720"/>
+        <testCase name="when user joins game when join game in settle time should return resultHash with rawValue" duration="44992"/>
+        <testCase name="when get history should return history" duration="93"/>
+        <testCase name="place bet when place bet in placing bet time should return own bet data" duration="13153"/>
+        <testCase name="place bet when place bet NOT in placing bet time should return invalid" duration="39046"/>
+        <testCase name="place bet when get error response from api should return api error" duration="0"/>
+        <testCase name="place bet when API internal server error should return api error" duration="0"/>
+        <testCase name="when settle should return settled status data" duration="4702"/>
+        <testCase name="when settle should return settled finish data and hashResult with rawValue" duration="57979"/>
+        <testCase name="when settle should return resultHash at start placingBet time" duration="11996"/>
     </file>
 </testExecutions>

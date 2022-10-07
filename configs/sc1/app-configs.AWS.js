@@ -1,0 +1,53 @@
+export default {
+    hostingPort: 5000,
+    apiSettings: {
+        enabledApi: true,
+        apiUrl: "http://l1_game_api_AWS:5000",
+        authUrl: "http://l1_auth_api_AWS:5000",
+        client: {
+            id: "game-server",
+            secret: "gameserver@20luminet&",
+        },
+        useAuthenticate: true,
+        placeBetTimeout: 4000,
+        requestTimeout: 10000, // 10s
+        enabledApiLogs: true,
+    },
+    socketOptions: {
+        pingInterval: 60 * 1000,
+        pingTimeout: 60 * 1000,
+        transports: ["websocket"],
+        allowUpgrades: false,
+        perMessageDeflate: false,
+    },
+    enabledLogs: true,
+    database: {
+        url: "mongodb://lmn_backend:Sb%7B5r%40Xy4X%256%28%24%5Bt%252HsOxJ%7CQt9jdR%26t@10.99.99.56:27101/?replicaSet=L1_SabaAWS&appName=Sicbo",
+        options: {
+            dbName: "minigame",
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            auto_reconnect: true,
+        },
+    },
+    sentry: {
+        sentryUrl: "http://99f10b716ce14476842385daebd46e94@10.99.99.187:803/122",
+        logIdentifier: "sicbo",
+        env: "AWS",
+    },
+    authenticateSettings: {
+        url: "http://l1_auth_api_AWS:5000",
+        id: "game-services",
+        secret: "gameservices@20luminet&",
+        requestTimeout: 10000,
+        useAuthenticate: true,
+        audiences: ["api", "admin-api"],
+    },
+    userServiceSettings: {
+        url: "http://localhost:8004/api",
+    },
+    adminSecretKey: "asWDEer4yGdgsdqR4uqmKQZgh",
+    enableCorsWs: true,
+    corsUrls: ["https://sc1-games.sportsfun.app", "https://sc1-adm.sportsfun.app"],
+    chips: [1000, 500, 200, 100, 50, 10, 5, 1],
+};

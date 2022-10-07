@@ -1,8 +1,8 @@
-import { stub, stubMongooseModelStupidly } from "jest-micro-auto-stub";
 import mongoose from "mongoose";
 import gameSettings from "../../game-settings";
 import { Table } from "sc-game-base";
 import SicBoBot from "../bot";
+import appConfigs from "../../app-configs";
 
 jest.mock("sc-common/helpers/config-helper", () => ({
     getMaxBotForCurrentHour: () => 1,
@@ -68,7 +68,7 @@ const botPlayers = [
 describe("reset tests", () => {
     it("bot list should be empty when botenabled is false", async () => {
         gameData.gameConfigs.botenabled = false;
-        const bot = new SicBoBot(definition, gameData, userInfosRepository);
+        const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
 
         await bot.reset();
 
@@ -78,7 +78,7 @@ describe("reset tests", () => {
 
     it("bot list should have data when botenabled is true", async () => {
         findExecMockFunction.mockReturnValueOnce(botPlayers);
-        const bot = new SicBoBot(definition, gameData, userInfosRepository);
+        const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
 
         await bot.reset();
 
@@ -93,7 +93,7 @@ describe("place bet tests", () => {
     describe("when successful bet", () => {
         it("should update totalTickets", async () => {
             // arrange
-            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
             await bot.reset();
 
             // act
@@ -105,7 +105,7 @@ describe("place bet tests", () => {
 
         it("should update smallTickets", async () => {
             // arrange
-            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
             await bot.reset();
 
             // act
@@ -117,7 +117,7 @@ describe("place bet tests", () => {
 
         it("should update allBets", async () => {
             // arrange
-            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
             await bot.reset();
 
             // act
@@ -134,7 +134,7 @@ describe("place bet tests", () => {
         });
         it("shouldnt update totalTickets", async () => {
             // arrange
-            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
             gameData.remainingTime = gameSettings.durations.lockingBet - 1;
             await bot.reset();
 
@@ -147,7 +147,7 @@ describe("place bet tests", () => {
 
         it("shouldnt update smallTickets", async () => {
             // arrange
-            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
             gameData.remainingTime = gameSettings.durations.lockingBet - 1;
             await bot.reset();
 
@@ -160,7 +160,7 @@ describe("place bet tests", () => {
 
         it("shouldnt update allBets", async () => {
             // arrange
-            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
             gameData.remainingTime = gameSettings.durations.lockingBet - 1;
             await bot.reset();
 
@@ -176,7 +176,7 @@ describe("place bet tests", () => {
 describe("max bet test", () => {
     it("should return correct max bet with anyTriple Choice", async () => {
         findExecMockFunction.mockReturnValueOnce(botPlayers);
-        const bot = new SicBoBot(definition, gameData, userInfosRepository);
+        const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
         await bot.reset();
         const maxBet = bot.getMaxBet(botPlayers[0], "anyTriple");
         expect(maxBet).toEqual(Math.min(gameData.gameConfigs.choices_maxbet.anyTriple, gameData.gameConfigs.bot_maxbet * 0.1));
@@ -184,7 +184,7 @@ describe("max bet test", () => {
 
     it("should return correct max bet with total Choice", async () => {
         findExecMockFunction.mockReturnValueOnce(botPlayers);
-        const bot = new SicBoBot(definition, gameData, userInfosRepository);
+        const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
         await bot.reset();
         const maxBet = bot.getMaxBet(botPlayers[0], "total8");
         expect(maxBet).toEqual(Math.min(gameData.gameConfigs.choices_maxbet.total8, gameData.gameConfigs.bot_maxbet * 0.2));
@@ -194,7 +194,7 @@ describe("max bet test", () => {
         "should return choice's max bet when small tickets is greater than its raito",
         async (choice) => {
             findExecMockFunction.mockReturnValueOnce(botPlayers);
-            const bot = new SicBoBot(definition, gameData, userInfosRepository);
+            const bot = new SicBoBot(definition, gameData, userInfosRepository, appConfigs);
             await bot.reset();
             bot.totalTickets = 1;
             bot.smallTickets = 1;
