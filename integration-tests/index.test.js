@@ -4,6 +4,7 @@ import { ingameTest } from "./in-game.test";
 import { getHistoryTest } from "./get-history.test";
 import { placeBetTest } from "./place-bet.test";
 import { settleTest } from "./settle.test";
+import { rebetTest } from "./rebet.test";
 
 let processStartService;
 
@@ -24,6 +25,7 @@ afterAll(() => {
     processStartService.kill();
 });
 
+rebetTest();
 signinTest();
 ingameTest();
 getHistoryTest();

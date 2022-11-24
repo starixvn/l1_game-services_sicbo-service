@@ -1,49 +1,71 @@
-import ProcessBetQueue from "../process-bet-queue";
-import gameSettings from "../../game-settings";
-import { Table } from "sc-game-base";
-
-jest.mock("sc-game-base/src/core/event-publishers");
-
-const definition = new Table.TableGameDefinition(gameSettings);
-const gameData = new Table.TableGameData(gameSettings.durations.placingBets - 1);
-
-beforeEach(() => {
-    gameData.ingame = {
-        player01: {
-            name: "player01",
-            betTracks: {},
-            betQueue: [],
+jest.mock("sc-rebet-mode", () => {
+    return {
+        Crons: {
+            ProcessBetQueue: class A {
+                generatePlacingBetResult() {
+                    return { x: 123 };
+                }
+            },
         },
     };
 });
+import ProcessBetQueue from "../process-bet-queue";
 
-describe("decrease bet tracks test", () => {
-    const testData = [
-        [{ specific1: { 100: 2 } }, { betChoice: "specific1", amount: 100 }, { specific1: { 100: 1 } }],
-        [
-            { specific1: { 100: 2 }, specific2: { 10: 1 } },
-            { betChoice: "specific1", amount: 100 },
-            { specific1: { 100: 1 }, specific2: { 10: 1 } },
-        ],
-    ];
-    it.each(testData)("should reduce player's chips correctly", (chips, bet, expectedChips) => {
-        gameData.ingame.player01.chips = chips;
-        const betQueue = new ProcessBetQueue({ definition, gameData });
-        betQueue.decreaseBetTracks("player01", bet);
-        expect(chips).toEqual(expectedChips);
-    });
-});
-
-describe("generatePlacingBetResult tests", () => {
-    it("result should include ownChip", () => {
-        const bet = { betChoice: "specific1", amount: 100 };
-        const betQueue = new ProcessBetQueue({ definition, gameData });
+describe("generatePlacingBetResult", () => {
+    it("when rebet should return rebet", () => {
+        // Arrange
+        const processBetQueue = new ProcessBetQueue();
         const player = {
-            profile: {
-                name: "player01",
+            session: {
+                currencyGroupId: "1",
             },
         };
-        const result = betQueue.generatePlacingBetResult(player, {}, bet);
-        expect(result.ownChip).toEqual(bet);
+        const balance = {};
+        const bet = {
+            rebet: true,
+            lastBet: {
+                big: 10,
+                anyTriple: 20,
+            },
+        };
+        const rebet = { x: 1 };
+        processBetQueue.gameData = {
+            currencyGroupGames: [
+                {
+                    groupId: 1,
+                    chips: [],
+                },
+            ],
+        };
+        processBetQueue.rebetProcessor = {
+            convertRebetToChipList: jest.fn(() => rebet),
+        };
+
+        // Act
+        const result = processBetQueue.generatePlacingBetResult(player, balance, bet);
+
+        // Assert
+        expect(result).toEqual({ x: 123, rebet: { x: 1 } });
+    });
+
+    it("when normal should return ownchip", () => {
+        // Arrange
+        const processBetQueue = new ProcessBetQueue();
+        const player = {
+            session: {
+                currencyGroupId: "1",
+            },
+        };
+        const balance = {};
+        const bet = {
+            betChoice: "big",
+            amount: 10,
+        };
+
+        // Act
+        const result = processBetQueue.generatePlacingBetResult(player, balance, bet);
+
+        // Assert
+        expect(result).toEqual({ x: 123, ownChip: { betChoice: "big", amount: 10 } });
     });
 });

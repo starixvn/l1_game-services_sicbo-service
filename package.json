@@ -4,6 +4,7 @@
     "description": "",
     "main": "./src/app.js",
     "scripts": {
+        "dev-test": "jest ",
         "test": "jest --testPathPattern=src/",
         "test-coverage": "jest --collect-coverage --testPathPattern=src",
         "integration-test": "jest integration-tests/index.test.js --ci --reporters=default --reporters=jest-junit --forceExit",
@@ -24,7 +25,8 @@
         "nodemon": "^2.0.4",
         "random": "^2.2.0",
         "random-js": "^2.1.0",
-        "sc-game-base": "3.1.1"
+        "sc-game-base": "3.1.1",
+        "sc-rebet-mode": "1.0.1-beta.13"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.14.5",
