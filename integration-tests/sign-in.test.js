@@ -4,15 +4,12 @@ import { initUserSession } from "./init-user-session";
 
 export const signinTest = () => {
     describe("signin", () => {
-        it("should receive signed in response", (done) => {
+        it("should receive signed in response", async () => {
             // Arrange & Act
-            const normalUserClientDriver = new GameClientDriver(socketOptions, initUserSession(normalUser));
+            const driver = new GameClientDriver(socketOptions, initUserSession(normalUser));
 
             // Assert
-            normalUserClientDriver.handleSignedInEvent(() => {
-                normalUserClientDriver.close();
-                done();
-            });
+            await driver.handleSignedInEvent();
         });
     });
 };
