@@ -25,7 +25,7 @@ afterAll(() => {
 });
 
 signinTest();
-// ingameTest();
-// getHistoryTest();
+ingameTest();
+getHistoryTest();
 // placeBetTest();
 // settleTest();

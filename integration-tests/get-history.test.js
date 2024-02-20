@@ -4,12 +4,20 @@ import { initUserSession } from "./init-user-session";
 
 export const getHistoryTest = () => {
     describe("when get history", () => {
-        it("should return history", (done) => {
+        let driver;
+        beforeAll(async () => {
+            driver = new GameClientDriver(socketOptions, initUserSession(normalUser));
+            await driver.handleSignedInEvent();
+            driver.sendInGameEvent();
+            await driver.handleGameEvent((inGameData) => inGameData.remainingTime);
+        });
+
+        afterAll(() => {
+            driver.close();
+        });
+
+        it("should return history", async () => {
             // Arrange
-            const client = new GameClientDriver(socketOptions, initUserSession(normalUser));
-            client.handleSignedInEvent(() => {
-                client.sendInGameEvent();
-            });
             const expectedData = [
                 {
                     specific1: 0,
@@ -124,30 +132,21 @@ export const getHistoryTest = () => {
                 },
             ];
 
-            client.on(socketOptions.gameName, (inGameData) => {
-                if (inGameData.remainingTime) {
-                    // Act
-                    client.sendGetHistoryEvent();
+            // Act
+            driver.sendGetHistoryEvent();
+            const result = await driver.handleGameEvent((historyData) => historyData.history);
 
-                    // Assert
-                    client.on(socketOptions.gameName, (data) => {
-                        if (data.history) {
-                            const actualBetLogs = data.history.betLogs.map((betLog) => {
-                                delete betLog.result;
-                                delete betLog.settlementResult;
-                                return betLog;
-                            });
-                            expect(actualBetLogs).toEqual(expectedData);
-                            expect(data.history.total).toBeGreaterThan(0);
-                            expect(data.history.page).toBe(1);
-                            expect(data.history.pageSize).toBe(8);
-
-                            client.close();
-                            done();
-                        }
-                    });
-                }
+            // Assert
+            const actualBetLogs = result.history.betLogs.map((betLog) => {
+                delete betLog.result;
+                delete betLog.settlementResult;
+                return betLog;
             });
+
+            expect(actualBetLogs).toEqual(expectedData);
+            expect(result.history.total).toBeGreaterThan(0);
+            expect(result.history.page).toBe(1);
+            expect(result.history.pageSize).toBe(8);
         });
     });
 };
