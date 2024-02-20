@@ -27,5 +27,5 @@ afterAll(() => {
 signinTest();
 ingameTest();
 getHistoryTest();
-// placeBetTest();
-// settleTest();
+placeBetTest();
+settleTest();
