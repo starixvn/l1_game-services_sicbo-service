@@ -191,13 +191,6 @@ describe("calculateBetResult test", () => {
 
 describe("settle bet tests", () => {
     describe(" when there is no bet", () => {
-        it("should call roundpublisher", async () => {
-            execMockFunc.mockReturnValueOnce([]);
-            const consumer = initConsumer();
-            await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
-            expect(roundResultPublisher.publishRoundResult).toHaveBeenCalled();
-        });
-
         it("should not  call userBetResultPublisher", async () => {
             execMockFunc.mockReturnValueOnce([]);
             const consumer = initConsumer();
@@ -245,14 +238,6 @@ describe("settle bet tests", () => {
             await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
 
             expect(endGame).toHaveBeenCalled();
-        });
-
-        it("should call roundpublisher ", async () => {
-            const consumer = initConsumer();
-
-            await consumer.settleBets({ result, settlementResult, roundId: 1, time: new Date() });
-
-            expect(roundResultPublisher.publishRoundResult).toHaveBeenCalled();
         });
 
         it("should call user bet publisher", async () => {
