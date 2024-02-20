@@ -1,7 +1,11 @@
-import { Core } from "sc-game-base";
-
 import appConfigs from "./app-configs";
 import gameSettings from "./game-settings";
+import { startTrace } from "sc-instrument";
+
+startTrace(appConfigs.otel?.enabled, appConfigs.otel?.endpoint, appConfigs.otel?.system, appConfigs.sentry.env, gameSettings.name);
+
+import { Core } from "sc-game-base";
+
 import { generateResult, getSettlementResult, generateRawResultForHash } from "./helpers/result-helper";
 import SicboContainerRegistry from "./sicbo-container-registry";
 

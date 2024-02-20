@@ -54,4 +54,9 @@ export default {
     enableMsgpackParser: false,
     chips: [20_000_000, 5_000_000, 1_000_000, 500_000, 200_000, 100_000, 50_000, 20_000, 10_000],
     convertChips: true,
+    otel: {
+        system: "VG",
+        enabled: true,
+        endpoint: "http://10.10.50.69:4318/v1/traces",
+    },
 };
