@@ -17,6 +17,8 @@ const Schema = new mongoose.Schema({
     playerId: { type: String },
     operatorId: { type: String, required: true },
     roundId: { type: Number, default: 0, required: true },
+
+    clientSentTime: { type: Date },
 });
 
 export default mongoose.model("SicBo_cuoc", Schema);
