@@ -29,7 +29,10 @@
     },
     "resolutions": {
         "sc-base-apis": "1.18.2",
-        "sc-base-database": "1.11.1"
+        "sc-base-database": "1.11.1",
+        "socket.io-parser": "4.0.5",
+        "mongoose": "5.13.20",
+        "minimist": "1.2.6"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.14.5",

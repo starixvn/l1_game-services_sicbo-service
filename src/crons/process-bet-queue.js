@@ -23,4 +23,13 @@ export default class ProcessBetQueue extends Core.Crons.ProcessBetQueue {
             playerInGame.chips[betChoice][amount] -= 1;
         }
     }
+
+    isCountOnTotalBets(player) {
+        return this.gameData.currencies.some(
+            (currency) =>
+                currency.partnerId === player.session.operatorId &&
+                currency.name === player.session.currencyName &&
+                !(currency.isTest && currency.isUncountOnTotal)
+        );
+    }
 }
