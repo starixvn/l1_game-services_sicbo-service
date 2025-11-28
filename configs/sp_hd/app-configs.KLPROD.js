@@ -22,7 +22,7 @@ export default {
         audiences: ["api", "admin-api"],
     },
     userServiceSettings: {
-        url: "http://sp-hd-user-service-kdprod-service:5000",
+        url: "http://sp-hd-user-service-klprod-service:5000",
     },
     socketOptions: {
         pingInterval: 60 * 1000,
@@ -41,14 +41,14 @@ export default {
         },
     },
     sentry: {
-        sentryUrl: "http://f4980024f65945179a125e7ce17286d0@sentrysc-ovs.ops-kluat.gamora.prod/178",
+        sentryUrl: "http://f4980024f65945179a125e7ce17286d0@sentry-scklprod-ovs.ops-klprod.gamora.prod/178",
         logIdentifier: "HD-Sicbo",
-        env: "KLPROD",
+        env: "PROD",
     },
     adminSecretKey: "asWDEerfOIdgsdqRTFabvmgh",
     metrics: {
         enable: true,
-        secretKey: "6c1f0f28-70f2-46ae-b031-22624a6cd8df",
+        secretKey: "30d15293-c7de-4c77-9293-b85d6c5bfe1a",
     },
     enableMsgpackParser: true,
     chatBotSettings: {
@@ -62,7 +62,7 @@ export default {
     enabledBoostedOdds: true,
     otel: {
         system: "HD",
-        enabled: false,
-        endpoint: "http://10.2.190.51:4318/v1/traces",
+        enabled: true,
+        endpoint: "http://jaeger-collector-sc.ops-klprod.gamora.prod:32318/v1/traces",
     },
 };
